@@ -1,9 +1,4 @@
-﻿
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <title>
@@ -74,6 +69,7 @@
     <script src="~/javascripts/main.js" type="text/javascript"></script>
     <script src="~/javascripts/respond.js" type="text/javascript"></script>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <script src="~/assets/js/jquery.min.js"></script>
 </head>
 <body>
     <div class="modal-shiftfix">
@@ -228,12 +224,12 @@
                             <a class="current" href="index-2.html"><span aria-hidden="true" class="icon-truck"></span>出库</a>
                         </li>
                         <li>
-                            <a href="social.html">
+                            <a href="social.html"class="current">
                                 <span aria-hidden="true" class="icon-truck"></span>入库
                             </a>
                         </li>
                         <li class="dropdown">
-                            <a data-toggle="dropdown" href="#">
+                            <a data-toggle="dropdown" href="#"class="current">
                                 <span aria-hidden="true" class="icon-refresh"></span>盘点<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
@@ -267,7 +263,7 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a data-toggle="dropdown" href="#">
+                            <a data-toggle="dropdown" href="#"class="current">
                                 <span aria-hidden="true" class="icon-home"></span>爱谁谁<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
@@ -286,7 +282,7 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a data-toggle="dropdown" href="#">
+                            <a data-toggle="dropdown" href="#"class="current">
                                 <span aria-hidden="true" class="se7en-tables"></span>我是谁<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
@@ -310,12 +306,12 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="charts.html">
+                            <a href="charts.html"class="current">
                                 <span aria-hidden="true" class="se7en-charts"></span>爱过谁
                             </a>
                         </li>
                         <li class="dropdown">
-                            <a data-toggle="dropdown" href="#">
+                            <a data-toggle="dropdown" href="#"class="current">
                                 <span aria-hidden="true" class="se7en-pages"></span>能为谁<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
@@ -391,17 +387,21 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="gallery.html">
-                                <span aria-hidden="true" class="se7en-gallery"></span>哈哈
+                            <a href="GetWareHouseMvc"class="current">
+                                <span aria-hidden="true" class="se7en-feed"></span>仓库管理
                             </a>
                         </li>
                     </ul>
                 </div>
+                <div>                
+                    @RenderBody();
+                </div>
             </div>
         </div>
-        <a href="">这里写东西</a>
-
     </div>
+    <script src="~/assets/js/amazeui.min.js"></script>
+    <script src="~/assets/js/amazeui.datatables.min.js"></script>
+    <script src="~/assets/js/dataTables.responsive.min.js"></script>
+    <script src="~/assets/js/app.js"></script>
 </body>
-
 </html>
