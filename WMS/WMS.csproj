@@ -132,6 +132,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AssetAllocation.cs" />
+    <Compile Include="Models\CheckSheet.cs" />
+    <Compile Include="Models\Delivery.cs" />
+    <Compile Include="Models\Inbound.cs" />
+    <Compile Include="Models\MakeAnInventoryOf.cs" />
+    <Compile Include="Models\PeopleRole.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductType.cs" />
+    <Compile Include="Models\RegionList.cs" />
+    <Compile Include="Models\UserInfo.cs" />
+    <Compile Include="Models\WareHouse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1039,7 +1050,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\WMS\" />
   </ItemGroup>
   <ItemGroup>
