@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "ChuKu";
+    Layout = "~/Views/BUJUYE.cshtml";
+}
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<div style="background-color:#f5f7fa;height:620px;margin-top:2px;">
+    <div style="height:50px;background-color:#fafbfc;">
+
+        <input id="Button1" type="button" class="btn btn-default" value="全部" style="margin-left:10px;margin-top:10px;" onclick="Quan()" />
+
+        <select id="Select1" style="border:none;margin-top:10px;">
+            <option selected=selected>筛选仓库</option>
+            <option>上海仓库</option>
+            <option>北京仓库</option>
+            <option>广州仓库</option>
+            <option>江苏仓库</option>
+        </select>
+
+        <input id="Button1" class="btn btn-default" type="button" value="添加" style="float:right;margin-top:10px;" />
+        <input id="Button1" class="btn btn-default" type="button" value="导出" style="float:right;margin-top:10px;" />
+
+        <input type="image" src="/images/magglass.gif" style="height:30px;margin-top:20px;float:right;" />
+        <input type="text" title="Search" class="searchinput" id="searchinput" style="border:none;height:30px;background-color:#fafbfc;float:right;margin-top:10px;" placeholder="搜索入库产品" />
+
+    </div>
+
+    <br />
+    @*-----------------------------表格*@
+    <div>
+        <div style="background-color:white;margin-left:10px;margin-right:10px; height:540px;">
+            <table class="table table-hover" border="1" style="margin: auto;border:none;">
+                <thead>
+                    <tr align="center" valign="middle">
+                        <td>产品编号</td>
+                        <td>产品名称</td>
+                        <td>产品品牌</td>
+                        <td>出库数量</td>
+                        <td>产品分类</td>
+                        <td>出库仓库</td>
+                        <td>出库时间</td>
+                        <td><span class="glyphicon glyphicon-cog"></span></td>
+                    </tr>
+                </thead>
+                <tbody id="tb"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        show();
+    })
+    function show() {
+        $.ajax({
+            url: "http://localhost:60847/api/yyl/getchu",
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                $("#tb").empty();
+                $(data).each(function () {
+
+                    var str = '<tr align="center" valign="middle">' +
+                        '<td>' + this.Id + '</td>' +
+                        '<td>' + this.ProductName + '</td>' +
+                        '<td>' + this.Brand + '</td>' +
+                        '<td>' + this.Quantity + '</td>' +
+                        '<td>' + this.ProductTypeName + '</td>' +
+                        '<td>' + this.Remark + '</td>' +
+                        '<td>' + this.StartTime + '</td>' +
+                        '<td><span class="glyphicon glyphicon-option-vertical"></span></td>' +
+                        '</tr>';
+                    $("#tb").append(str);
+                })
+            }
+        })
+    }
+    function Quan() {
+        show();
+    }
+</script>
+
+
