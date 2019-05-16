@@ -46,9 +46,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NPOI">
+      <HintPath>C:\Users\85087\Desktop\Content\NPOI\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>C:\Users\85087\Desktop\Content\NPOI\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>C:\Users\85087\Desktop\Content\NPOI\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>C:\Users\85087\Desktop\Content\NPOI\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -129,9 +142,11 @@
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\WMSController.cs" />
+    <Compile Include="Controllers\YYLController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HttpClient.cs" />
     <Compile Include="Models\AssetAllocation.cs" />
     <Compile Include="Models\CheckSheet.cs" />
     <Compile Include="Models\Delivery.cs" />
@@ -1059,8 +1074,9 @@
     <Content Include="Views\WMS\GetInbound.cshtml" />
     <Content Include="Views\WMS\GetMakeAnInventoryOf.cshtml" />
     <Content Include="Views\BUJUYE.cshtml" />
-    <Content Include="Views\Default\RuKu.cshtml" />
-    <Content Include="Views\Default\ChuKu.cshtml" />
+    <Content Include="Views\YYL\RuKu.cshtml" />
+    <Content Include="Views\YYL\ChuKu.cshtml" />
+    <Content Include="Views\YYL\AddRuKu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
