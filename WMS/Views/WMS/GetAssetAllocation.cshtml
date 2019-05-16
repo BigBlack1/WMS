@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="modal-shiftfix">
+    <div class="container-fluid main-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="widget-container fluid-height clearfix">
+                    <div class="heading">
+                        <i class="icon-table"></i>资产调度记录
+                    </div>
+                    <div class="widget-content padded clearfix">
+                        <table class="table table-bordered table-striped" id="dataTable1">
+                            <thead>
+                            <th>
+                                调度编号
+                            </th>
+                            <th>
+                                发货仓库
+                            </th>
+                            <th class="hidden-xs">
+                                收货仓库
+                            </th>
+                            <th class="hidden-xs">
+                                发货产品
+                            </th>
+                            <th class="hidden-xs">
+                                产品数量
+                            </th>
+                            <th>
+                                开始时间
+                            </th>
+                            <th>
+                                结束时间
+                            </th>
+                            <th>
+                                收据
+                            </th>
+                            </th>
+                            <tbody id="tby"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $.ajax({
+        url: "http://localhost:60847/api/KHZ/ShowAss",
+        type: "get",
+        success: function (data) {
+            $(data).each(function () {
+                var tr = "<tr>" +
+                    "<td>" + this.Id + "</td>" +
+                    "<td>" + this.WareHouseName1 + "</td>" +
+                    "<td>" + this.WareHouseName2 + "</td>" +
+                    "<td>" + this.ProductName + "</td>" +
+                    "<td>" + this.Shipping + "</td>" +
+                    "<td>" + this.StartTime + "</td>" +
+                    "<td>" + this.EndTime + "</td>" +
+                    "<td>" + this.Receipt + "</td>" +
+                    "</tr >";
+                $("#tby").append(tr);
+            })
+        }
+    })
+</script>
