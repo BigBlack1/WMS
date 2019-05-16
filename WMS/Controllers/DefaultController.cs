@@ -13,5 +13,13 @@ namespace WMS.Controllers
         {
             return View();
         }
+        public ActionResult RuKu()
+        {
+            return View();
+        }
+        public ActionResult ChuKu()
+        {
+            return View();
+        }
     }
 }

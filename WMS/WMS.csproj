@@ -220,6 +220,7 @@
     <Content Include="images\info-data-sprite.png" />
     <Content Include="images\login-blurry-bg.jpg" />
     <Content Include="images\logo-login%402x.png" />
+    <Content Include="images\magglass.gif" />
     <Content Include="images\nature1.jpg" />
     <Content Include="images\nature2.jpg" />
     <Content Include="images\nature3.jpg" />
@@ -344,6 +345,9 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Default\Index.cshtml" />
+    <Content Include="Views\BUJUYE.cshtml" />
+    <Content Include="Views\Default\RuKu.cshtml" />
+    <Content Include="Views\Default\ChuKu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
