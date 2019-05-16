@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="modal-shiftfix">
+    <div class="container-fluid main-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="widget-container fluid-height clearfix">
+                    <div class="heading">
+                        <i class="icon-table"></i>资产调度记录
+                    </div>
+                    <div class="widget-content padded clearfix">
+                        <table class="table table-bordered table-striped" id="dataTable1">
+                            <thead>
+                            <th>
+                                盘点记录Id
+                            </th>
+                            <th>
+                                盘点名称
+                            </th>
+                            <th class="hidden-xs">
+                                盘点时间
+                            </th>
+                            <th class="hidden-xs">
+                                盘点仓库
+                            </th>
+                            <th class="hidden-xs">
+                                盘点结果
+                            </th>
+                            <th>
+                                备注
+                            </th>
+                            <tbody id="tby"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $.ajax({
+        url: "http://localhost:60847/api/KHZ/ShowMake",
+        type: "get",
+        dataType: "json",
+        success: function (data) {
+            $(data).each(function () {
+                var tr = "<tr>" +
+                    "<td>" + this.Id + "</td>" +
+                    "<td>" + this.InventoryName + "</td>" +
+                    "<td>" + this.InventoryTime + "</td>" +
+                    "<td>" + this.WarehouseName + "</td>" +
+                    "<td>" + this.Status + "</td>" +
+                    "<td>" + this.Remark + "</td>" +
+                    "</tr >";
+                $("#tby").append(tr);
+            })
+        }
+    })
+</script>

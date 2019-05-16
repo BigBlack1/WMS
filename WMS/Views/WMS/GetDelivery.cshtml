@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="modal-shiftfix">
+    <div class="container-fluid main-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="widget-container fluid-height clearfix">
+                    <div class="heading">
+                        <i class="icon-table"></i>出库信息
+                    </div>
+                    <div class="widget-content padded clearfix">
+                        <table class="table table-bordered table-striped" id="dataTable1">
+                            <thead>
+                            <th>
+                                出库记录Id
+                            </th>
+                            <th>
+                                出库产品
+                            </th>
+                            <th class="hidden-xs">
+                                出库数量
+                            </th>
+                            <th class="hidden-xs">
+                                出库仓库
+                            </th>
+                            <th class="hidden-xs">
+                                出库时间
+                            </th>
+                            <th>
+                                出库清单
+                            </th>
+                            <tbody id="tby"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $.ajax({
+        url: "http://localhost:60847/api/KHZ/ShowDelivery",
+        success: function (data) {
+            $(data).each(function () {
+                var tr = "<tr>" +
+                    "<td>" + this.Id + "</td>" +
+                    "<td>" + this.ProductTypeName + "</td>" +
+                    "<td>" + this.Quantity + "</td>" +
+                    "<td>" + this.WarehouseName + "</td>" +
+                    "<td>" + this.StartTime + "</td>" +
+                    "<td>" + this.Contract + "</td>" +
+                    "</tr >";
+                $("#tby").append(tr);
+            })
+        }
+    })
+</script>

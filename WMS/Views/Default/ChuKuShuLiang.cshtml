@@ -1,0 +1,267 @@
+﻿
+@{
+    ViewBag.Title = "ChuKuShuLiang";
+    Layout = "~/Views/BUJUYE.cshtml";
+}
+
+<link href="~/js/css/timeline.css" rel="stylesheet" />
+<script src="~/js/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //隐藏所有子栏目（除第一个栏目外）
+        $(".year:not(:first)").find(".month").hide();
+        //点击大栏目
+        $(".year>li").click(function () {
+            $("li.active", $(this).parent()).removeClass("active");
+            $(this).addClass("active");
+            $("ul>li:first", this).addClass("active");
+        });
+        $(".month>li").click(function () {
+            var $ul = $(this).parent();
+            $ul.find(".active").removeClass("active");
+            $(this).addClass("active");
+            return false;
+        });
+    });
+
+</script>
+
+<div style="width:1400px;height:450px;">
+
+    <div style="float:left;width:200px;height:450px;margin-top:60px;margin-left:40px;">
+        <ul class="sidebar-nav" style="margin-left:30px;">
+            <li class="sidebar-nav-link" style="padding-bottom:40px;">
+                <a href="tables.html">
+                    <i class="am-icon-table sidebar-nav-link-logo"></i> 库存短缺
+                </a>
+            </li>
+            <li class="sidebar-nav-link" style="padding-bottom:40px">
+                <a href="tables.html">
+                    <i class="am-icon-table sidebar-nav-link-logo"></i> 库存积压
+                </a>
+            </li>
+            <li class="sidebar-nav-link" style="padding-bottom:40px">
+                <a href="form.html">
+                    <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 入库数量
+
+                </a>
+            </li>
+            <li class="sidebar-nav-link" style="padding-bottom:40px">
+                <a href="form.html">
+                    <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 出库数量
+
+                </a>
+            </li>
+            <li class="sidebar-nav-link" style="padding-bottom:40px">
+                <a href="login.html">
+                    <i class="am-icon-key sidebar-nav-link-logo"></i> 入库对比
+                </a>
+            </li>
+            <li class="sidebar-nav-link" style="padding-bottom:40px">
+                <a href="login.html">
+                    <i class="am-icon-key sidebar-nav-link-logo"></i> 出库对比
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="widget-content padded" style="float:left;margin-top:40px;">
+        <form action="#" class="form-horizontal">
+
+            <div class="box" style="height:350px;width:200px;background-color:#ffffff;border:none;">
+                <div class="timeline">
+                    <ul class="year">
+                        <!--year-->
+                        <li>
+                            <div class="year-button"> 2018 </div>
+                            <ul class="month">
+                                <li><a href="#">12月</a></li>
+                                <li><a href="#">11月</a></li>
+                                <li><a href="#">10月</a></li>
+                                <li><a href="#">9月</a></li>
+                                <li><a href="#">8月</a></li>
+                                <li><a href="#">7月</a></li>
+                                <li><a href="#">6月</a></li>
+                                <li><a href="#">5月</a></li>
+                                <li><a href="#">4月</a></li>
+                                <li><a href="#">3月</a></li>
+                                <li><a href="#">2月</a></li>
+                                <li><a href="#">1月</a></li>
+                            </ul>
+                            <!--month-->
+                        </li>
+                        <!--year-->
+                        <li class="active">
+                            <div class="year-button"> 2019 </div>
+                            <ul class="month">
+                                <li class="active"><a href="#">5月</a></li>
+                                <li><a href="#">12月</a></li>
+                                <li><a href="#">11月</a></li>
+                                <li><a href="#">10月</a></li>
+                                <li><a href="#">9月</a></li>
+                                <li><a href="#">8月</a></li>
+                                <li><a href="#">7月</a></li>
+                                <li><a href="#">6月</a></li>
+                                <li><a href="#">5月</a></li>
+                                <li><a href="#">4月</a></li>
+                                <li><a href="#">3月</a></li>
+                                <li><a href="#">2月</a></li>
+                                <li><a href="#">1月</a></li>
+                            </ul>
+                            <!--month-->
+                        </li>
+                        <!--year-->
+                        <!--year-->
+                    </ul>
+                    <!--time-ul-->
+                </div>
+                <!--time-->
+            </div>
+        </form>
+    </div>
+
+    <div class="col-lg-6" style="width:900px;height:400px;margin-top:40px;">
+
+        <table class="table table-hover">
+            <thead>
+            <th>
+                编号
+            </th>
+            <th>
+                名称
+            </th>
+            <th>
+                数量
+            </th>
+            <th class="hidden-xs">
+                库存预警值
+            </th>
+            <th class="hidden-xs">
+                异常比例
+            </th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        Robert
+                    </td>
+                    <td>
+                        Kelso
+                    </td>
+                    <td>
+                        robert@gmail.com
+                    </td>
+                    <td class="hidden-xs">
+                        8-15-2013
+                    </td>
+                    <td>
+                        100%
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        John
+                    </td>
+                    <td>
+                        Dorian
+                    </td>
+                    <td>
+                        john@gmail.com
+                    </td>
+                    <td class="hidden-xs">
+                        8-15-2013
+                    </td>
+                    <td>
+                        100%
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Olivia
+                    </td>
+                    <td>
+                        Benson
+                    </td>
+                    <td>
+                        olivia@gmail.com
+                    </td>
+                    <td class="hidden-xs">
+                        8-15-2013
+                    </td>
+                    <td>
+                        100%
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Elliot
+                    </td>
+                    <td>
+                        Stabler
+                    </td>
+                    <td>
+                        elliot@gmail.com
+                    </td>
+                    <td class="hidden-xs">
+                        8-15-2013
+                    </td>
+                    <td>
+                        100%
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Maggie
+                    </td>
+                    <td>
+                        Smith
+                    </td>
+                    <td>
+                        maggie@gmail.com
+                    </td>
+                    <td class="hidden-xs">
+                        8-15-2013
+                    </td>
+                    <td>
+                        100%
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Maggie
+                    </td>
+                    <td>
+                        Smith
+                    </td>
+                    <td>
+                        maggie@gmail.com
+                    </td>
+                    <td class="hidden-xs">
+                        8-15-2013
+                    </td>
+                    <td>
+                        100%
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Maggie
+                    </td>
+                    <td>
+                        Smith
+                    </td>
+                    <td>
+                        maggie@gmail.com
+                    </td>
+                    <td class="hidden-xs">
+                        8-15-2013
+                    </td>
+                    <td>
+                        100%
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
