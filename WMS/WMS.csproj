@@ -231,6 +231,7 @@
     <Content Include="images\info-data-sprite.png" />
     <Content Include="images\login-blurry-bg.jpg" />
     <Content Include="images\logo-login%402x.png" />
+    <Content Include="images\magglass.gif" />
     <Content Include="images\nature1.jpg" />
     <Content Include="images\nature2.jpg" />
     <Content Include="images\nature3.jpg" />
@@ -529,6 +530,12 @@
     <Content Include="layui\font\iconfont.eot" />
     <Content Include="layui\font\iconfont.ttf" />
     <Content Include="layui\font\iconfont.woff" />
+    <Content Include="assets\css\app.less" />
+    <Content Include="assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="assets\fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1051,6 +1058,9 @@
     <Content Include="Views\WMS\GetDelivery.cshtml" />
     <Content Include="Views\WMS\GetInbound.cshtml" />
     <Content Include="Views\WMS\GetMakeAnInventoryOf.cshtml" />
+    <Content Include="Views\BUJUYE.cshtml" />
+    <Content Include="Views\Default\RuKu.cshtml" />
+    <Content Include="Views\Default\ChuKu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
