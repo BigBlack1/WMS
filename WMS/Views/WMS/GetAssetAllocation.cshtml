@@ -3,8 +3,23 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
 <div class="modal-shiftfix">
     <div class="container-fluid main-content">
+        <div style="height:50px;background-color:#fafbfc;">
+            <input id="Button1" type="button" class="btn btn-default" value="全部" style="margin-left:10px;margin-top:10px;" onclick="Quan()" />
+            <select id="Select1" style="border:none;margin-top:10px;">
+                <option selected=selected>筛选仓库</option>
+                <option>宝山区一号仓库</option>
+                <option>北京仓库</option>
+                <option>广州仓库</option>
+                <option>江苏仓库</option>
+            </select>
+            <input id="Button1" class="btn btn-default" type="button" value="添加" style="float:right;margin-top:10px;" />
+            <input id="Button1" class="btn btn-default" type="button" value="导出" style="float:right;margin-top:10px;" />
+            <input type="image" src="/images/magglass.gif" style="height:30px;margin-top:20px;float:right;" />
+            <input type="text" title="Search" class="searchinput" id="searchinput" style="border:none;height:30px;background-color:#fafbfc;float:right;margin-top:10px;" placeholder="搜索入库产品" />
+        </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="widget-container fluid-height clearfix">
@@ -14,31 +29,33 @@
                     <div class="widget-content padded clearfix">
                         <table class="table table-bordered table-striped" id="dataTable1">
                             <thead>
-                            <th>
-                                调度编号
-                            </th>
-                            <th>
-                                发货仓库
-                            </th>
-                            <th class="hidden-xs">
-                                收货仓库
-                            </th>
-                            <th class="hidden-xs">
-                                发货产品
-                            </th>
-                            <th class="hidden-xs">
-                                产品数量
-                            </th>
-                            <th>
-                                开始时间
-                            </th>
-                            <th>
-                                结束时间
-                            </th>
-                            <th>
-                                收据
-                            </th>
-                            </th>
+                                <tr>
+                                    <th>
+                                        调度编号
+                                    </th>
+                                    <th>
+                                        发货仓库
+                                    </th>
+                                    <th class="hidden-xs">
+                                        收货仓库
+                                    </th>
+                                    <th class="hidden-xs">
+                                        发货产品
+                                    </th>
+                                    <th class="hidden-xs">
+                                        产品数量
+                                    </th>
+                                    <th>
+                                        开始时间
+                                    </th>
+                                    <th>
+                                        结束时间
+                                    </th>
+                                    <th>
+                                        收据
+                                    </th>
+                                </tr>
+                            </thead>
                             <tbody id="tby"></tbody>
                         </table>
                     </div>
