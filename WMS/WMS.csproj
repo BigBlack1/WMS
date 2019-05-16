@@ -135,6 +135,47 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\admin.css" />
+    <Content Include="assets\css\amazeui.datatables.min.css" />
+    <Content Include="assets\css\amazeui.min.css" />
+    <Content Include="assets\css\app.css" />
+    <Content Include="assets\css\fullcalendar.min.css" />
+    <Content Include="assets\css\fullcalendar.print.css" />
+    <Content Include="assets\img\a5.png" />
+    <Content Include="assets\img\k.jpg" />
+    <Content Include="assets\img\logo.png" />
+    <Content Include="assets\img\logoa.png" />
+    <Content Include="assets\img\logob.png" />
+    <Content Include="assets\img\user01.png" />
+    <Content Include="assets\img\user02.png" />
+    <Content Include="assets\img\user03.png" />
+    <Content Include="assets\img\user04.png" />
+    <Content Include="assets\img\user05.png" />
+    <Content Include="assets\img\user06.png" />
+    <Content Include="assets\img\user07.png" />
+    <Content Include="assets\i\app-icon72x72%402x.png" />
+    <Content Include="assets\i\examples\admin-chrome.png" />
+    <Content Include="assets\i\examples\admin-firefox.png" />
+    <Content Include="assets\i\examples\admin-ie.png" />
+    <Content Include="assets\i\examples\admin-opera.png" />
+    <Content Include="assets\i\examples\admin-safari.png" />
+    <Content Include="assets\i\examples\adminPage.png" />
+    <Content Include="assets\i\examples\blogPage.png" />
+    <Content Include="assets\i\examples\landing.png" />
+    <Content Include="assets\i\examples\landingPage.png" />
+    <Content Include="assets\i\examples\loginPage.png" />
+    <Content Include="assets\i\examples\sidebarPage.png" />
+    <Content Include="assets\i\favicon.png" />
+    <Content Include="assets\i\startup-640x1096.png" />
+    <Content Include="assets\js\amazeui.datatables.min.js" />
+    <Content Include="assets\js\amazeui.min.js" />
+    <Content Include="assets\js\app.js" />
+    <Content Include="assets\js\dataTables.responsive.min.js" />
+    <Content Include="assets\js\echarts.min.js" />
+    <Content Include="assets\js\fullcalendar.min.js" />
+    <Content Include="assets\js\jquery.min.js" />
+    <Content Include="assets\js\moment.js" />
+    <Content Include="assets\js\theme.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -248,6 +289,12 @@
     <Content Include="font\se7en.woff" />
     <Content Include="font\se7end41d.eot" />
     <Content Include="images\Thumbs.db" />
+    <Content Include="assets\css\app.less" />
+    <Content Include="assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="assets\fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -297,11 +344,14 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Default\Index.cshtml" />
+    <Content Include="Views\WMS\GetAssetAllocation.cshtml" />
+    <Content Include="Views\WMS\GetDelivery.cshtml" />
+    <Content Include="Views\WMS\GetInbound.cshtml" />
+    <Content Include="Views\WMS\GetMakeAnInventoryOf.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\WMS\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
