@@ -1047,10 +1047,13 @@
     <Content Include="static\fonts\fontomas-webfont.eot" />
     <Content Include="static\fonts\fontomas-webfont.ttf" />
     <Content Include="static\fonts\fontomas-webfont.woff" />
+    <Content Include="Views\WMS\GetAssetAllocation.cshtml" />
+    <Content Include="Views\WMS\GetDelivery.cshtml" />
+    <Content Include="Views\WMS\GetInbound.cshtml" />
+    <Content Include="Views\WMS\GetMakeAnInventoryOf.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\WMS\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
