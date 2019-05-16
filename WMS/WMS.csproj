@@ -1074,6 +1074,9 @@
     <Content Include="Views\WMS\GetInbound.cshtml" />
     <Content Include="Views\WMS\GetMakeAnInventoryOf.cshtml" />
     <Content Include="Views\BUJUYE.cshtml" />
+    <Content Include="Views\Default\RuKu.cshtml" />
+    <Content Include="Views\Default\ChuKu.cshtml" />
+    <Content Include="Views\WMS\GetOneMake.cshtml" />
     <Content Include="Views\YYL\RuKu.cshtml" />
     <Content Include="Views\YYL\ChuKu.cshtml" />
     <Content Include="Views\YYL\AddRuKu.cshtml" />

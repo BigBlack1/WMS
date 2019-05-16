@@ -9,48 +9,38 @@
             <div class="col-lg-12">
                 <div class="widget-container fluid-height clearfix">
                     <div class="form-group" style="margin-top:10px">
-                        <div class="col-md-7" style="width:15%;margin-left:10%">
-                            <select class="form-control" id="ck">
-                                <option value="">盘点仓库</option>
-                                <option value="1">宝山一号</option>
-                                <option value="2">徐汇二号</option>
-                                <option value="3">青浦三号</option>
-                                <option value="4">松江四号</option>
-                                <option value="5">闵行五号</option>
-                            </select>
-                        </div>
                         <div class="col-md-7" style="width:20%;margin-left:30%">
-                            <input class="form-control" type="text" placeholder="请输入盘点名称" id="name"></input>
+                            <input class="form-control" type="text" placeholder="请输入产品名称" id="name"></input>
                         </div>
                         <span class="input-group-btn" style="margin-right:10%"><button class="btn btn-default" type="button" onclick="sousuo()">搜索</button></span>
                     </div>
                     <div class="heading">
-                        <i class="icon-table"></i>盘点记录
+                        <i class="icon-table"></i>@Session["iname"] 盘点记录
                     </div>
                     <div class="widget-content padded clearfix">
                         <table class="table table-bordered table-striped" id="dataTable1">
                             <thead>
                                 <tr>
                                     <th>
-                                        盘点记录Id
-                                    </th>
-                                    <th>
                                         盘点名称
                                     </th>
+                                    <th>
+                                        盘点产品
+                                    </th>
                                     <th class="hidden-xs">
+                                        最近入库数量
+                                    </th>
+                                    <th class="hidden-xs">
+                                        最近出库数量
+                                    </th>
+                                    <th class="hidden-xs">
+                                        库存数量
+                                    </th>
+                                    <th>
                                         盘点时间
                                     </th>
-                                    <th class="hidden-xs">
-                                        盘点仓库
-                                    </th>
-                                    <th class="hidden-xs">
-                                        盘点结果
-                                    </th>
                                     <th>
-                                        备注
-                                    </th>
-                                    <th>
-                                        查看
+                                        操作
                                     </th>
                                 </tr>
                             </thead>
@@ -66,21 +56,22 @@
 
 <script>
     $.ajax({
-        url: "http://localhost:60847/api/KHZ/ShowMake",
+        url: "http://localhost:60847/api/KHZ/ShowCheck",
         type: "get",
         dataType: "json",
+        data: {"mId":@Session["mid"]},
         success: function (data) {
             $(data).each(function () {
                 var tr = "<tr>" +
-                    "<td>" + this.Id + "</td>" +
                     "<td>" + this.InventoryName + "</td>" +
+                    "<td>" + this.ProductName + "</td>" +
+                    "<td>" + this.InNum + "</td>" +
+                    "<td>" + this.OutNum + "</td>" +
+                    "<td>" + this.ProductNum + "</td>" +
                     "<td>" + this.InventoryTime + "</td>" +
-                    "<td>" + this.WarehouseName + "</td>" +
-                    "<td>" + this.Status + "</td>" +
-                    "<td>" + this.Remark + "</td>" +
                     "<td class='actions'>" +
                     "<div class='action-buttons'>" +
-                    "<a class='table-actions' href='/WMS/GetOneMake?mId=" + this.Id + "&iName=" + this.InventoryName + "'><i class='icon-eye-open'></i></a>" +
+                    "<a class='table-actions' href='#'><i class='icon-pencil'></i></a>" +
                     "</div>" +
                     "</td>" +
                     "</tr >";
@@ -92,22 +83,22 @@
     function sousuo() {
         $("#tby").empty();
         $.ajax({
-            url: "http://localhost:60847/api/KHZ/ShowMake",
+            url: "http://localhost:60847/api/KHZ/ShowCheck",
             type: "get",
             dataType: "json",
-            data: { "ck": $("#ck").val(), "iName": $("#name").val() },
+            data: { "mId":@Session["mid"], "pName": $("#name").val() },
             success: function (data) {
                 $(data).each(function () {
                     var tr = "<tr>" +
-                        "<td>" + this.Id + "</td>" +
                         "<td>" + this.InventoryName + "</td>" +
+                        "<td>" + this.ProductName + "</td>" +
+                        "<td>" + this.InNum + "</td>" +
+                        "<td>" + this.OutNum + "</td>" +
+                        "<td>" + this.ProductNum + "</td>" +
                         "<td>" + this.InventoryTime + "</td>" +
-                        "<td>" + this.WarehouseName + "</td>" +
-                        "<td>" + this.Status + "</td>" +
-                        "<td>" + this.Remark + "</td>" +
                         "<td class='actions'>" +
                         "<div class='action-buttons'>" +
-                        "<a class='table-actions' href='/WMS/GetOneMake?mId=" + this.Id + "&iName=" + this.InventoryName + "'><i class='icon-eye-open'></i></a>" +
+                        "<a class='table-actions' href='#'><i class='icon-pencil'></i></a>" +
                         "</div>" +
                         "</td>" +
                         "</tr >";

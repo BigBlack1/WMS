@@ -8,54 +8,55 @@
 <link rel="stylesheet" type="text/css" href="~/static/admin/css/admin.css" />
 <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
 
-<div style="background-color:#ffffff;width:1600px;height:550px;margin:0 auto">
+<div style="background-color:#ffffff;width:100%;height:550px;margin:0 auto">
 
-    <div style="float:left;width:200px;height:450px;margin-top:60px;margin-left:40px;">
+    <div style="float:left;width:15%;height:430px;margin-top:50px;margin-left:40px;">
         <ul class="sidebar-nav" style="margin-left:30px;">
             <li class="sidebar-nav-link" style="padding-bottom:40px;">
-                <a href="tables.html">
+                <a href="/Default/Index">
                     <i class="am-icon-table sidebar-nav-link-logo"></i> 库存短缺
                 </a>
             </li>
             <li class="sidebar-nav-link" style="padding-bottom:40px">
-                <a href="tables.html">
+                <a href="/Default/Indexs">
                     <i class="am-icon-table sidebar-nav-link-logo"></i> 库存积压
                 </a>
             </li>
             <li class="sidebar-nav-link" style="padding-bottom:40px">
-                <a href="form.html">
+                <a href="/Default/Indexss">
                     <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 入库数量
 
                 </a>
             </li>
             <li class="sidebar-nav-link" style="padding-bottom:40px">
-                <a href="form.html">
+                <a href="/Default/ChuKuShuLiang">
                     <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 出库数量
 
                 </a>
             </li>
             <li class="sidebar-nav-link" style="padding-bottom:40px">
-                <a href="login.html">
+                <a href="/Default/RuKuHuanBi">
                     <i class="am-icon-key sidebar-nav-link-logo"></i> 入库对比
                 </a>
             </li>
             <li class="sidebar-nav-link" style="padding-bottom:40px">
-                <a href="login.html">
+                <a href="/Default/ChuKuHuanBi">
                     <i class="am-icon-key sidebar-nav-link-logo"></i> 出库对比
                 </a>
             </li>
         </ul>
     </div>
 
-    <div class="col-lg-6" style="width:900px;height:400px;margin-top:40px; margin-left:80px; border-left: 2px solid #808080;">
+    <div class="col-lg-6" style="width:80%;height:400px;margin-top:40px; ">
         <table id="table" class="layui-table">
             <thead>
-                <tr>
-                    <td>编号</td>
-                    <td>名称</td>
-                    <td>数量</td>
-                    <td>库存预警值</td>
-                    <td>异常比例</td>
+                <tr style="margin:0 auto">
+                    <td width="300px;"style="margin:0 auto">编号</td>
+                    <td width="300px;">名称</td>
+                    <td width="300px;">数量</td>
+                    <td width="300px;">库存预警值</td>
+                    <td width="300px;">异常比例</td>
+                    <td width="300px;">说明</td>
                 </tr>
             </thead>
             <thead id="G_xian">
@@ -63,44 +64,42 @@
         </table>
     </div>
 </div>
-<div id="demo7"></div>
+<div id="demo7" style="margin-left:700px;"></div>
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script src="~/layui-v2.4.5/layui/layui.js"></script>
 <script>
-    layui.use(['laypage', 'layer'], function ()
-    {
-        var laypage = layui.laypage
-            , layer = layui.layer;
-        $("#G_xian").empty();// 清空TBODY的内容，重新加载
-        $.ajax({
-            url: "http://localhost:60847/api/SHJ/ProductGet",
-            type: 'get',
-            dataType: 'text',
-            success: function (data)
-            {
-                //调用分页
-                laypage.render({
-                    elem: 'demo7'
-                    , count: data.length
-                    , layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip']
-                    , limit: 5
-                    , jump: function (obj)
-                    {
-                        //模拟渲染
-                        document.getElementById('G_xian').innerHTML = function ()
-                        {
-                            var arr = []
-                                , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
-                            layui.each(thisData, function (index, item)
-                            {
-                                arr.push('<tr><td>' + item.Id + '</td><td>' + item.ProductName + '</td><td>' + item.Quantity + '</td><td>' + item.Id + '</td><td>' + item.Id + '</td></tr>');
-                            });
-                            return arr.join('');
-                        }();
-                    }
-                });
-            }
-        })
-    });
+    $(function () {
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage
+                , layer = layui.layer;
+            $("#G_xian").empty();// 清空TBODY的内容，重新加载
+            $.ajax({
+                url: "http://localhost:60847/api/WLC/JiYa",
+                type: 'get',
+                dataType: 'Json',
+                success: function (data) {
+                    //调用分页
+                    laypage.render({
+                        elem: 'demo7'
+                        , count: data.length
+                        , layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip']
+                        , limit: 5
+                        , jump: function (obj) {
+                            //模拟渲染
+                            document.getElementById('G_xian').innerHTML = function () {
+                                var arr = []
+                                    , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                layui.each(thisData, function (index, item) {
+                                    arr.push('<tr><td>' + item.Id + '</td><td>' + item.ProductName + '</td><td>' + item.Quantity + '</td><td>' + 100 + '</td><td>' + ((item.Quantity / 100 * 10000) / 100.00 + "%") + '</td><td>库存大于100件</td></tr>');
+                                });
+                                
+                                return arr.join('');
+                            }();
+                        }
+                    });
+                }
+            })
+        });
+    })
 </script>
 

@@ -45,5 +45,15 @@ namespace WMS.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// 获取到盘点信息
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetOneMake(string mId,string iName)
+        {
+            Session["mid"] = mId;
+            Session["iname"] = iName;
+            return View();
+        }
     }
 }
