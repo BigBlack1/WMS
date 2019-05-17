@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace WMS.Controllers
 {
+    [MyAuth]
     public class DefaultController : Controller
     {
         // GET: Default
