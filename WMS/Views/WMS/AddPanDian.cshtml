@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "AddPanDian";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<script>
+    function pandian() {
+        var o = new Object();
+        o.InventoryName = $("#name").val();
+        o.WarehouseId = $("#ck").val();
+        if (o.WarehouseId == "") {
+            alert('请选择仓库');
+        } else {
+            $.ajax({
+                url: "http://localhost:60847/api/KHZ/AddCheck?makeAn=" + o,
+                type:"post",
+                data: { "makeAn": o },
+                success: function (data) {
+                    if (data > 0) {
+                        alert('添加成功');
+                    }
+                }
+            })
+        }
+        }
+</script>
