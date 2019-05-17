@@ -55,5 +55,9 @@ namespace WMS.Controllers
             Session["iname"] = iName;
             return View();
         }
+        public ActionResult AddPanDian()
+        {
+            return View();
+        }
     }
 }
