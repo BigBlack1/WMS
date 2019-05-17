@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
-
 namespace WMS
 {
     public static class HttpClientr
@@ -22,13 +21,13 @@ namespace WMS
                     task = client.GetAsync(actonName);
                     break;
                 case "post":
-                    task = client.PostAsJsonAsync(actonName, obj);
+                    //task = client.PostAsJsonAsync(actonName, obj);
                     break;
                 case "delete":
                     task = client.DeleteAsync(actonName);
                     break;
                 case "put":
-                    task = client.PutAsJsonAsync(actonName, obj);
+                    //task = client.PutAsJsonAsync(actonName, obj);
                     break;
                 default:
                     break;

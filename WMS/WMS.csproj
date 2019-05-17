@@ -47,21 +47,24 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NPOI">
-      <HintPath>C:\Users\85087\Desktop\Content\NPOI\NPOI.dll</HintPath>
+      <HintPath>..\..\控件\导入 导出\ExcelDemo\NPOI_dll\NPOI.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OOXML">
-      <HintPath>C:\Users\85087\Desktop\Content\NPOI\NPOI.OOXML.dll</HintPath>
+      <HintPath>..\..\控件\导入 导出\ExcelDemo\NPOI_dll\NPOI.OOXML.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OpenXml4Net">
-      <HintPath>C:\Users\85087\Desktop\Content\NPOI\NPOI.OpenXml4Net.dll</HintPath>
+      <HintPath>..\..\控件\导入 导出\ExcelDemo\NPOI_dll\NPOI.OpenXml4Net.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OpenXmlFormats">
-      <HintPath>C:\Users\85087\Desktop\Content\NPOI\NPOI.OpenXmlFormats.dll</HintPath>
+      <HintPath>..\..\控件\导入 导出\ExcelDemo\NPOI_dll\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\控件\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
