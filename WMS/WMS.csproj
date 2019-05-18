@@ -1080,6 +1080,7 @@
     <Content Include="Views\YYL\RuKu.cshtml" />
     <Content Include="Views\YYL\ChuKu.cshtml" />
     <Content Include="Views\YYL\AddRuKu.cshtml" />
+    <Content Include="Views\YYL\AddChuKu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,15 +1,15 @@
 ﻿
 @{
-    ViewBag.Title = "AddRuKu";
+    ViewBag.Title = "AddChuKu";
     Layout = "~/Views/BUJUYE.cshtml";
 }
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-3.3.1.js"></script>
-<form action='@Url.Action("FileUpload","YYL")' method="post" enctype="multipart/form-data">
+<form action='@Url.Action("FileUpload1","YYL")' method="post" enctype="multipart/form-data">
     <div>
         <b>新增入库</b>
         <input id="Submit1" type="submit" value="提交" style="float:right;" class="btn btn-default" onclick="Add()" />
-        <input id="Button1" type="button" value="返回" style="float:right" class="btn btn-default" onclick="location.href='/YYL/RuKu'" />
+        <input id="Button1" type="button" value="返回" style="float:right" class="btn btn-default" onclick="location.href='/YYL/ChuKu'" />
 
     </div>
     <input id="Hidden1" type="hidden" value="@DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")" />
@@ -136,14 +136,14 @@
         var s4 = $("#f1").val();
         var s5 = $("#Select5").val();
         $.ajax({
-            url: "http://localhost:60847/api/yyl/AddRuKu",
+            url: "http://localhost:60847/api/yyl/AddChuKu",
             type: "post",
             dataType: "json",
-            data: { Quantity: s3, StartTime: h1, RegionListId: s5, Contract: s4, ProductId: s2},
+            data: { Quantity: s3, StartTime: h1, RegionListId: s5, Contract: s4, ProductId: s2 },
             success: function (data) {
-                if (data=="添加成功") {
-     
-                 
+                if (data == "添加成功") {
+
+
                 }
             }
         })
@@ -154,3 +154,5 @@
 
 
 </script>
+
+
