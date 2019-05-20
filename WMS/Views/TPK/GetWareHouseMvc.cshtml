@@ -1,4 +1,5 @@
 ﻿
+
 @{
     ViewBag.Title = "GetWareHouseMvc";
     Layout = "~/Views/Default/Index.cshtml";
@@ -21,15 +22,13 @@
                     <div class="widget-container fluid-height clearfix">
                         <br />
                         <a href="GetWareHouseMvc" class="current" style="margin-left:20PX;">
-                            <span aria-hidden="true" class="se7en-feed"></span>仓库信息
+                            <span aria-hidden="true" class="se7en-feed"></span>仓库管理
                         </a>
                         <a onclick="AddWareHouseMvc()" style="cursor: pointer;margin-left:25PX;" class="current">
                             <span aria-hidden="true" class='icon-plus'></span>新增仓库
                         </a>
-                        &nbsp; &nbsp; &nbsp;
-                        <a href="GetRegionListViewMvc" class="current" style="margin-left:20PX;">
-                            <span aria-hidden="true" class="se7en-feed"></span>分区信息
-                        </a>
+
+
                         <div class="widget-content padded clearfix" style="height:1000px;">
                             <table class="table table-bordered table-striped" id="dataTable1">
                                 <thead>
@@ -68,7 +67,7 @@
 </html>
 <script>
     $.ajax({
-        url: "http://localhost:60847/api/TPK/GetWareHous",
+        url: "http://localhost:60847/api/TPK/GetWareHouse",
         success: function (data) {
 
             $(data).each(function () {
@@ -90,9 +89,9 @@
     //删除仓库
     function DeleWareHouseMvc(id) {
 
-        
+
         $.ajax({
-            url: "http://localhost:60847/api/TPK/DeleWareHous?id=" + id,
+            url: "http://localhost:60847/api/TPK/DeleWareHouse?id=" + id,
             type: "DELETE",
             success: function (date) {
 
@@ -109,7 +108,7 @@
 
     //添加仓库
     function AddWareHouseMvc() {
-   
+
         var str = "<table style='width: 230px; height: 230px;margin-left:150px;' class='layui-table'><tr><td style = 'width: 230px;'> 仓库名称:</td> <td><input type='text' id='WarehouseName' /></td></tr > <tr style='margin-top:60px;'><td>仓库容量: </td><td><input type='text' id='Capacity' /></td></tr> <tr style='margin-top:60px;' > <td>仓库地址: </td><td><input type='text' id='Locationss' /></td></tr> <tr style='margin-top:60px;' ><td>备注: </td> <td><input type='text' id='Remark' /></td></tr> </table > <input type='button' value='提交' onclick='AddWareHouse()'  style='width:227px;margin-left:150px;' /> ";
         layer.open(
             {
@@ -122,17 +121,17 @@
 
     //添加
     function AddWareHouse() {
-        
+
         var o = {
 
             WarehouseName: $("#WarehouseName").val(),
-            Capacity: $("#Capacity").val(),        
+            Capacity: $("#Capacity").val(),
             Location: $("#Locationss").val(),
             Remark: $("#Remark").val(),
 
         }
         $.ajax({
-            url: "http://localhost:60847/api/TPK/AddWareHous?w=" + JSON.stringify(o),
+            url: "http://localhost:60847/api/TPK/AddWareHouse?w=" + JSON.stringify(o),
             data: { o: JSON.stringify(o) },
             type: "post",
             dataType: "json",

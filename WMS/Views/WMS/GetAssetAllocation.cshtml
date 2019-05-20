@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<div class="modal-shiftfix">
+    <div class="container-fluid main-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="widget-container fluid-height clearfix">
+                    <div class="form-group" style="margin-top:10px">
+                        <div class="col-md-7" style="width:15%;margin-left:10%">
+                            <select class="form-control" id="fwh">
+                                <option value="">发货仓库</option>
+                                <option value="1">宝山一号</option>
+                                <option value="2">徐汇二号</option>
+                                <option value="3">青浦三号</option>
+                                <option value="4">松江四号</option>
+                                <option value="5">闵行五号</option>
+                            </select>
+                        </div>
+                        <div class="col-md-7" style="width:15%;" id="cwh">
+                            <select class="form-control">
+                                <option value="">收货仓库</option>
+                                <option value="1">宝山一号</option>
+                                <option value="2">徐汇二号</option>
+                                <option value="3">青浦三号</option>
+                                <option value="4">松江四号</option>
+                                <option value="5">闵行五号</option>
+                            </select>
+                        </div>
+                        <div class="col-md-7" style="width:20%;margin-left:30%">
+                            <input class="form-control" type="text" placeholder="请输入产品名称" id="pro"></input>
+                        </div>
+                        <span class="input-group-btn" style="margin-right:10%"><button class="btn btn-default" type="button" onclick="sousuo()">搜索</button></span>
+                    </div>
+                    <div class="heading">
+                        <i class="icon-table"></i>资产调度记录
+                    </div>
+                    <div class="widget-content padded clearfix">
+                        <table class="table table-bordered table-striped" id="dataTable1">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        调度编号
+                                    </th>
+                                    <th>
+                                        发货仓库
+                                    </th>
+                                    <th class="hidden-xs">
+                                        收货仓库
+                                    </th>
+                                    <th class="hidden-xs">
+                                        发货产品
+                                    </th>
+                                    <th class="hidden-xs">
+                                        产品数量
+                                    </th>
+                                    <th>
+                                        开始时间
+                                    </th>
+                                    <th>
+                                        结束时间
+                                    </th>
+                                    <th>
+                                        收据
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="tby"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $.ajax({
+        url: "http://localhost:60847/api/KHZ/ShowAss",
+        type: "get",
+        success: function (data) {
+            $(data).each(function () {
+                var tr = "<tr>" +
+                    "<td>" + this.Id + "</td>" +
+                    "<td>" + this.WareHouseName1 + "</td>" +
+                    "<td>" + this.WareHouseName2 + "</td>" +
+                    "<td>" + this.ProductName + "</td>" +
+                    "<td>" + this.Shipping + "</td>" +
+                    "<td>" + this.StartTime + "</td>" +
+                    "<td>" + this.EndTime + "</td>" +
+                    "<td>" + this.Receipt + "</td>" +
+                    "</tr >";
+                $("#tby").append(tr);
+            })
+        }
+    })
+
+    function sousuo() {
+        $("#tby").empty();
+        $.ajax({
+            url: "http://localhost:60847/api/KHZ/ShowAss",
+            type: "get",
+            data: { "whName1": $("#fwh").val(), "whName2": $("#cwh").val(), "pro": $("#pro").val() },
+            success: function (data) {
+                $(data).each(function () {
+                    var tr = "<tr>" +
+                        "<td>" + this.Id + "</td>" +
+                        "<td>" + this.WareHouseName1 + "</td>" +
+                        "<td>" + this.WareHouseName2 + "</td>" +
+                        "<td>" + this.ProductName + "</td>" +
+                        "<td>" + this.Shipping + "</td>" +
+                        "<td>" + this.StartTime + "</td>" +
+                        "<td>" + this.EndTime + "</td>" +
+                        "<td>" + this.Receipt + "</td>" +
+                        "</tr >";
+                    $("#tby").append(tr);
+                })
+            }
+        })
+    }
+</script>
