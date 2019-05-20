@@ -1,0 +1,161 @@
+﻿
+@{
+    ViewBag.Title = "GetWareHouseMvc";
+    Layout = "~/Views/Default/Index.cshtml";
+}
+<script src="~/layer-v3.0.3/layer/layer.js"></script>
+<script src="~/layui-v2.4.5/layui/layui.js"></script>
+
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div class="modal-shiftfix">
+        <!-- Navigation -->
+        <!-- End Navigation -->
+        <div class="container-fluid main-content">
+
+            <!-- DataTables Example -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="widget-container fluid-height clearfix">
+                        <br />
+                        <a href="GetWareHouseMvc" class="current" style="margin-left:20PX;">
+                            <span aria-hidden="true" class="se7en-feed"></span>仓库信息
+                        </a>
+                        <a onclick="AddWareHouseMvc()" style="cursor: pointer;margin-left:25PX;" class="current">
+                            <span aria-hidden="true" class='icon-plus'></span>新增仓库
+                        </a>
+                        &nbsp; &nbsp; &nbsp;
+                        <a href="GetRegionListViewMvc" class="current" style="margin-left:20PX;">
+                            <span aria-hidden="true" class="se7en-feed"></span>分区信息
+                        </a>
+                        <div class="widget-content padded clearfix" style="height:1000px;">
+                            <table class="table table-bordered table-striped" id="dataTable1">
+                                <thead>
+
+                                <th>
+                                    仓库名称
+                                </th>
+                                <th>容量(箱)</th>
+
+                                <th class="hidden-xs">
+                                    仓库负责人
+                                </th>
+                                <th class="hidden-xs">
+                                    负责人电话
+                                </th>
+                                <th class="hidden-xs">
+                                    仓库地址
+                                </th>
+                                <th class="hidden-xs">
+                                    创建时间
+                                </th>
+                                <th>操作</th>
+                                </thead>
+                                <tbody id="GetTR"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end DataTables Example -->
+        </div>
+    </div>
+</body>
+
+
+</html>
+<script>
+    $.ajax({
+        url: "http://localhost:60847/api/TPK/GetWareHouse",
+        success: function (data) {
+
+            $(data).each(function () {
+                var tr = "<tr>" +
+                    "<td>" + this.WarehouseName + "</td>" +
+                    "<td>" + this.Capacity + "</td>" +
+                    "<td>" + this.Name + "</td>" +
+                    "<td class='hidden-xs'>" + this.Tel + "</td>" +
+                    "<td class='hidden-xs'>" + this.Location + "</td>" +
+                    "<td class='hidden-xs'>" + this.Establish + "</td>" +
+                    "<td class='actions'><a class='table-actions'  href='Map?name=+" + this.Location + "'><i class='icon-map-marker'></i></a><a style='cursor: pointer' class='table-actions' onclick='DeleWareHouseMvc(" + this.WarehouseId + ")'><i class='icon-trash'></i></a><a style='cursor: pointer' class='table-actions' onclick='AddWareHouseMvc()'><i class='icon-plus'></i></a></td>+"
+                "</tr>";
+                $("#GetTR").append(tr);
+            })
+        }
+
+    })
+
+    //删除仓库
+    function DeleWareHouseMvc(id) {
+        @*if (@Session["Login"]== 1) {*@
+
+
+        $.ajax({
+            url: "http://localhost:60847/api/TPK/DeleWareHouse?id=" + id,
+            type: "DELETE",
+            success: function (date) {
+
+                if (date > 0) {
+                    layer.msg('删除成功', { time: 2000 }, function () { location.href = '/TPK/GetWareHouseMvc' })
+
+                } else {
+
+                    layer.msg('成功', { time: 2000 }, function () { location.href = '/TPK/GetWareHouseMvc' })
+                }
+            }
+            })
+        //} else {
+        //    layui.msg('无权操作', 1000)
+        //}
+
+    }
+
+    //添加仓库
+    function AddWareHouseMvc() {
+      @*if (@Session["Login"]== 1) {*@
+        var str = "<table style='width: 230px; height: 230px;margin-left:150px;' class='layui-table'><tr><td style = 'width: 230px;'> 仓库名称:</td> <td><input type='text' id='WarehouseName' /></td></tr > <tr style='margin-top:60px;'><td>仓库容量: </td><td><input type='text' id='Capacity' /></td></tr> <tr style='margin-top:60px;' > <td>仓库地址: </td><td><input type='text' id='Locationss' /></td></tr> <tr style='margin-top:60px;' ><td>备注: </td> <td><input type='text' id='Remark' /></td></tr> </table > <input type='button' value='提交' onclick='AddWareHouse()'  style='width:227px;margin-left:150px;' /> ";
+        layer.open(
+            {
+                type: 1,
+                title: "新增仓库",
+                content: str,
+                area: ["500px", "300px"],
+              });
+      //} else {
+      //    layui.msg('无权操作', 1000)
+      //}
+    }
+
+    //添加
+    function AddWareHouse() {
+
+        var o = {
+
+            WarehouseName: $("#WarehouseName").val(),
+            Capacity: $("#Capacity").val(),
+            Location: $("#Locationss").val(),
+            Remark: $("#Remark").val(),
+
+        }
+        $.ajax({
+            url: "http://localhost:60847/api/TPK/AddWareHouse?w=" + JSON.stringify(o),
+            data: { o: JSON.stringify(o) },
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+
+                if (data > 0) {
+                    location.href = '/TPK/GetWareHouseMvc'
+                } else {
+                    location.href = '/TPK/GetWareHouseMvc'
+                }
+            }
+
+
+        })
+    }
+
+
+</script>
