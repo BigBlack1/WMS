@@ -35,9 +35,9 @@ namespace WMS.Controllers
             return View();
         }
         /// <summary>
-        /// 获取入库记录
+        /// 
         /// </summary>
-        /// <returns></returns>
+        /// <returns></ret获取入库记录urns>
         [HttpGet]
         public ActionResult GetInbound()
         {
