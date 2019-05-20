@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace Model
+namespace WMS
 {
     public class Inbound//入库信息表
     {
@@ -22,5 +22,9 @@ namespace Model
         public string WarehouseName { get; set; }//仓库名称
         public string Location { get; set; }//仓库地址
         public string Remark { get; set; }//仓库备注
+        public string ProductTypeName { get; set; }//产品分类
+        public int ProductTypeId { get; set; }//产品外键
+        public int Num { get; set; }
+       
     }
 }

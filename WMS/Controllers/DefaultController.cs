@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace WMS.Controllers
 {
+    [MyAuth]
     public class DefaultController : Controller
     {
         // GET: Default
@@ -37,13 +38,6 @@ namespace WMS.Controllers
         {
             return View();
         }
-        public ActionResult RuKu()
-        {
-            return View();
-        }
-        public ActionResult ChuKu()
-        {
-            return View();
-        }
+
     }
 }

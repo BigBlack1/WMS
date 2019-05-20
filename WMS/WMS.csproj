@@ -46,9 +46,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NPOI">
+      <HintPath>C:\Users\85087\Desktop\Content\NPOI\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>C:\Users\85087\Desktop\Content\NPOI\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>C:\Users\85087\Desktop\Content\NPOI\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>C:\Users\85087\Desktop\Content\NPOI\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -128,10 +141,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MyAuthAttribute.cs" />
     <Compile Include="Controllers\WMSController.cs" />
+    <Compile Include="Controllers\YYLController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HttpClient.cs" />
     <Compile Include="Models\AssetAllocation.cs" />
     <Compile Include="Models\CheckSheet.cs" />
     <Compile Include="Models\Delivery.cs" />
@@ -192,12 +208,18 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fmb01\css\body.css" />
+    <Content Include="fmb01\css\style.css" />
+    <Content Include="fmb01\images\8bcLQqF.png" />
+    <Content Include="fmb01\images\cloud.jpg" />
+    <Content Include="fmb01\Login.html" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="font\fontawesome-webfont.svg" />
     <Content Include="font\glyphicons-halflings-regular.svg" />
     <Content Include="font\se7en.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\300727.jpg" />
     <Content Include="images\alpha.png" />
     <Content Include="images\avatar-female.jpg" />
     <Content Include="images\avatar-female.png" />
@@ -210,6 +232,7 @@
     <Content Include="images\chat-right.png" />
     <Content Include="images\checkmark%402x.png" />
     <Content Include="images\checkmark.png" />
+    <Content Include="images\e7ef805404ddb703de6d51993f0b47d9.png" />
     <Content Include="images\fancybox_overlay.png" />
     <Content Include="images\hue.png" />
     <Content Include="images\icon-search%402x.png" />
@@ -244,6 +267,7 @@
     <Content Include="images\select2x2.png" />
     <Content Include="images\sn-logo%402x.png" />
     <Content Include="images\social-image.jpg" />
+    <Content Include="images\t01a85bd56b1603c45b.jpg" />
     <Content Include="javascripts\application.js" />
     <Content Include="javascripts\bootstrap-colorpicker.js" />
     <Content Include="javascripts\bootstrap-datepicker.js" />
@@ -1062,6 +1086,10 @@
     <Content Include="Views\Default\RuKu.cshtml" />
     <Content Include="Views\Default\ChuKu.cshtml" />
     <Content Include="Views\WMS\GetOneMake.cshtml" />
+    <Content Include="Views\YYL\RuKu.cshtml" />
+    <Content Include="Views\YYL\ChuKu.cshtml" />
+    <Content Include="Views\YYL\AddRuKu.cshtml" />
+    <Content Include="Views\YYL\AddChuKu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
