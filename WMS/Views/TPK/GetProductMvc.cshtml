@@ -1,5 +1,4 @@
 ﻿
-
 @{
     ViewBag.Title = "GetProductMvc";
     Layout = "~/Views/Default/Index.cshtml";
@@ -25,7 +24,7 @@
             <span aria-hidden="true" style="font-size:23px;">搜索</span>
         </a>
 
-        <input type="text" title="Search" class="searchinput" id="searchinput" style="border:none;height:30px;background-color:#fafbfc;float:right;margin-top:10px;" placeholder="搜索入库产品" />
+        <input type="text" title="Search" class="searchinput" id="searchinput" style="border:none;height:30px;background-color:#fafbfc;float:right;margin-top:10px;" placeholder="搜索产品名称" />
 
     </div>
 
@@ -107,7 +106,7 @@
                                             '<td>' + item.ProductTypeName + '</td>' +
                                             '<td>' + item.Remark + '</td>' +
                                             '<td>' + item.RegionListName + '</td>' +
-
+                                          
                                             //'<td id="sp"><span class="glyphicon glyphicon-option-vertical" ></span></td>' +
                                             '</tr>');
                                     });
@@ -122,7 +121,7 @@
         }
         //筛选仓库
     function Xuan() {
-
+       
         var Productsum = 0;
             layui.use('laypage', function () {
                 var laypage = layui.laypage,
@@ -133,10 +132,10 @@
                     type: "get",
                     dataType: "json",
                     success: function (data) {
-
-
+                       
+                       
                         $("#tb").empty();
-
+                      
                         laypage.render({
                             elem: 'demo7',
                             count: data.length,
@@ -156,12 +155,12 @@
                                             '<td>' + item.ProductTypeName + '</td>' +
                                             '<td>' + item.Remark + '</td>' +
                                             '<td>' + item.RegionListName + '</td>' +
-
+                                      
                                             //'<td><span class="glyphicon glyphicon-option-vertical"></span></td>' +
                                             '</tr>');
                                         Productsum += item.Quantity;
                                     });
-
+                                   
                                     if (2999<Productsum<=3000) {
                                         $("#summ").text("货物已满");
                                     }
@@ -171,8 +170,8 @@
                                     if (Productsum<1000) {
                                         $("#summ").text("欠缺");
                                     }
-
-
+                                
+                                   
                                     return arr.join('');
                                 }();
                             }
@@ -213,7 +212,7 @@
                                             '<td>' + item.ProductTypeName + '</td>' +
                                             '<td>' + item.Remark + '</td>' +
                                             '<td>' + item.RegionListName + '</td>' +
-                                            '<td>' + item.StartTime + '</td>' +
+                                        
                                             //'<td><span class="glyphicon glyphicon-option-vertical"></span></td>' +
                                             '</tr>');
                                     });
