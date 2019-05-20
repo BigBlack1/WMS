@@ -8,7 +8,7 @@ namespace WMS
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
-            filters.Add(new MyAuthAttribute());
+            //filters.Add(new MyAuthAttribute());
         }
     }
 }
