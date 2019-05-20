@@ -1,9 +1,10 @@
 ﻿
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/BUJUYE.cshtml";
 }
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
 <div class="modal-shiftfix">
     <div class="container-fluid main-content">
         <div class="row">
@@ -39,7 +40,7 @@
                         <i class="icon-table"></i>资产调度记录
                     </div>
                     <div class="widget-content padded clearfix">
-                        <table class="table table-bordered table-striped" id="dataTable1">
+                        <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>
@@ -48,13 +49,13 @@
                                     <th>
                                         发货仓库
                                     </th>
-                                    <th class="hidden-xs">
+                                    <th>
                                         收货仓库
                                     </th>
-                                    <th class="hidden-xs">
+                                    <th>
                                         发货产品
                                     </th>
-                                    <th class="hidden-xs">
+                                    <th>
                                         产品数量
                                     </th>
                                     <th>
@@ -97,7 +98,6 @@
             })
         }
     })
-
     function sousuo() {
         $("#tby").empty();
         $.ajax({

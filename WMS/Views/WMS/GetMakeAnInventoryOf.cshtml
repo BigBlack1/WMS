@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/BUJUYE.cshtml";
 }
 <script src="~/layui/lay/modules/layer.js"></script>
 <link href="~/layui/css/modules/layer/default/layer.css" rel="stylesheet" />
@@ -124,21 +124,25 @@
 
     //添加盘点
     function GoMake() {
-
-        var str = "<table><tr><td>仓库名称: </td><td><select id='Select1'>" +
-            "<option value = '1' > 宝山一号</option>" +
-            "<option value='2'>徐汇二号</option>" +
-            "<option value='3'>青浦三号</option>" +
-            "<option value='4'>松江四号</option>" +
-            "<option value='5'>闵行五号</option>" +
-            "</select ></td ></tr > <tr style='margin-top:60px;'><td>要添加的盘点名称: </td><td><input type='text' name='Capacity' id='Text1'/></td></tr> <tr><td></td><td><input type='button' onclick='pandian()' value='提交' class='layui-btn layui-btn-warm layui-btn-radius' /></td></tr></table >";
-        layer.open(
-            {
-                type: 1,
-                title: "去盘点",
-                content: str,
-                area: ["500px", "300px"],
-            });
+        if (@Session["Login"] == 1 || @Session["Login"] == 2) {
+            var str = "<table><tr><td>仓库名称: </td><td><select id='Select1'>" +
+                "<option value = '1' > 宝山一号</option>" +
+                "<option value='2'>徐汇二号</option>" +
+                "<option value='3'>青浦三号</option>" +
+                "<option value='4'>松江四号</option>" +
+                "<option value='5'>闵行五号</option>" +
+                "</select ></td ></tr > <tr style='margin-top:60px;'><td>要添加的盘点名称: </td><td><input type='text' name='Capacity' id='Text1'/></td></tr> <tr><td></td><td><input type='button' onclick='pandian()' value='提交' class='layui-btn layui-btn-warm layui-btn-radius' /></td></tr></table >";
+            layer.open(
+                {
+                    type: 1,
+                    title: "去盘点",
+                    content: str,
+                    area: ["500px", "300px"],
+                });
+        } else
+        {
+            layui.msg('无权操作', 1000);
+        }
     }
 
     function pandian() {
