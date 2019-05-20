@@ -3,6 +3,9 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/layui/lay/modules/layer.js"></script>
+<link href="~/layui/css/modules/layer/default/layer.css" rel="stylesheet" />
+<script src="~/assets/js/jquery.min.js"></script>
 <div class="modal-shiftfix">
     <div class="container-fluid main-content">
         <div class="row">
@@ -71,7 +74,7 @@
                     "<td>" + this.InventoryTime + "</td>" +
                     "<td class='actions'>" +
                     "<div class='action-buttons'>" +
-                    "<a class='table-actions' href='#'><i class='icon-pencil'></i></a>" +
+                    "<button class='table-actions' onclick='GoMake(" + this.ProductId + ")'><i class='icon-pencil'></i></button>" +
                     "</div>" +
                     "</td>" +
                     "</tr >";
@@ -98,12 +101,38 @@
                         "<td>" + this.InventoryTime + "</td>" +
                         "<td class='actions'>" +
                         "<div class='action-buttons'>" +
-                        "<a class='table-actions' href='#'><i class='icon-pencil'></i></a>" +
+                        "<button class='table-actions' onclick='GoMake(" + this.ProductId + ")'><i class='icon-pencil'></i></button>" +
                         "</div>" +
                         "</td>" +
                         "</tr >";
                     $("#tby").append(tr);
                 })
+            }
+        })
+    }
+
+    //添加盘点
+    function GoMake(id) {
+
+        var str = "<table>" +
+            "<tr style='margin-top:60px;'><td>修改数量: </td><td><input type='text' name='Capacity' id='Text1'/></td></tr> <tr><td></td><td><input type='button' onclick='xiugai(" + id + ")' value='提交' class='layui-btn layui-btn-warm layui-btn-radius' /></td></tr></table >";
+        layer.open(
+            {
+                type: 1,
+                title: "去盘点",
+                content: str,
+                area: ["500px", "300px"],
+            });
+    }
+
+    function xiugai(id) {
+        $.ajax({
+            url: "http://localhost:60847/api/KHZ/UptPro?id=" + id + "&num=" + $("#Text1").val()+"&name="+@Session["iname"],
+            type: "post",
+            success: function (data) {
+                if (data > 0) {
+                    alert('添加成功');
+                }
             }
         })
     }
