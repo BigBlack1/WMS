@@ -40,13 +40,13 @@
             url: "http://localhost:60847/api/SHJ/Login?tel=" + tel + "&pwd=" + pwd,
             type: "get",
             success: function (data) {
-                if (data = 1) {
+                if (data == 1) {
                     location.href = '../Default/Index';
                 }
-                else if (data = 2) {
+                else if (data == 2) {
                     location.href = '../WMS/GetAssetAllocation';
                 }
-                else if (data = 3) {
+                else if (data == 3) {
                     location.href = '../YYL/RuKu';
                 }
                 else {

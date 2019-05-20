@@ -206,7 +206,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="login1.html">
+                                        <a href="../fmb01/login.html">
                                             <i class="icon-signout"></i>Logout
                                         </a>
                                     </li>
@@ -223,36 +223,36 @@
                     <div class="nav-collapse">
                         <ul class="nav">
                             <li>
-                                <a class="current" onclick="alert('无权操作')">
+                                <a onclick="alert('无权操作'); $(this).addClass('current')">
                                     <span aria-hidden="true" class="icon-truck"></span>出库
                                 </a>
                             </li>
                             <li>
-                                <a  onclick="alert('无权操作')" >
+                                <a  onclick="alert('无权操作'); $(this).addClass('current')" >
                                     <span aria-hidden="true" class="icon-truck"></span>入库
                                 </a>
                             </li>
                             <li class="dropdown">
-                                <a data-toggle="dropdown" href="#">
+                                <a data-toggle="dropdown" href="" onclick="$(this).addClass('current')">
                                     <span aria-hidden="true" class="icon-refresh"></span>盘点<b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="GetMakeAnInventoryOf">盘点记录</a>
+                                        <a href="../WMS/GetMakeAnInventoryOf">盘点记录</a>
                                     </li>
                                     <li>
-                                        <a href="GetAssetAllocation">资产调度记录</a>
+                                        <a href="../WMS/GetAssetAllocation">资产调度记录</a>
                                     </li>
                                     <li>
-                                        <a href="GetDelivery">出库记录</a>
+                                        <a href="../WMS/GetDelivery">出库记录</a>
                                     </li>
                                     <li>
-                                        <a href="GetInbound">入库记录</a>
+                                        <a href="../WMS/GetInbound">入库记录</a>
                                     </li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a data-toggle="dropdown" href="#">
+                                <a data-toggle="dropdown" href="#" onclick="$(this).addClass('current')">
                                     <span aria-hidden="true" class="icon-home"></span>仓库状态<b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
@@ -265,7 +265,7 @@
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a data-toggle="dropdown" href="#">
+                                <a data-toggle="dropdown" href="#" onclick="$(this).addClass('current')">
                                     <span aria-hidden="true" class="se7en-charts"></span>辅助分析<b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
@@ -273,7 +273,7 @@
                                         <a href="Index">库存短缺</a>
                                     </li>
                                     <li>
-                                        <a href="Indexs.html">库存积压</a>
+                                        <a href="Indexs">库存积压</a>
                                     </li>
                                     <li>
                                         <a href="Indexss">入库数量</a>
@@ -290,12 +290,12 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="GetProductMvc">
+                                <a href="GetProductMvc" onclick="$(this).addClass('current')">
                                     <span aria-hidden="true" class="se7en-tables"></span>仓库产品
                                 </a>
                             </li>
                             <li>
-                                <a href="Contact">
+                                <a href="Contact" onclick="$(this).addClass('current')">
                                     <span aria-hidden="true" class="se7en-star"></span>联系我们
                                 </a>
                             </li>
