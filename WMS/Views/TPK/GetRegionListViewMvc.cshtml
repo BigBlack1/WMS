@@ -1,0 +1,307 @@
+﻿
+@{
+    ViewBag.Title = "GetProductMvc";
+    Layout = "~/Views/Default/Index.cshtml";
+}
+
+<script src="~/layer-v3.0.3/layer/layer.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui-v2.4.5/layui/layui.js"></script>
+
+<div style="height:620px;margin-top:2px;">
+    <br />
+    <div style="height:50px;">
+        <a onclick="Quan()" style="height:30px;margin-top:10px;cursor: pointer" class="current">
+            <span aria-hidden="true" style="font-size:18px;">所有仓库</span>
+        </a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <select id="Select1" style="border:none;" onchange="Xuan()"></select>
+
+        &nbsp; &nbsp; &nbsp;
+        <a href="GetWareHouseMvc" class="current" style="margin-left:20PX;">
+            <span aria-hidden="true" class="se7en-feed"></span>仓库信息
+        </a>
+
+        <a onclick="Cha()" style="height:30px;margin-top:10px;float:right;cursor: pointer" class="current">
+            <span aria-hidden="true" style="font-size:23px;">搜索</span>
+        </a>
+
+        <input type="text" title="Search" class="searchinput" id="searchinput" style="border:none;height:30px;background-color:#fafbfc;float:right;margin-top:10px;" placeholder="搜索号架名称" />
+
+    </div>
+
+    <br />
+    @*-----------------------------表格*@
+    <div>
+        <div style="background-color:white;margin-left:10px;margin-right:10px; height:540px;">
+            <table class="table table-hover" border="1" style="margin: auto;border:none;">
+                <thead>
+                    <tr align="center" valign="middle">
+
+                        <td>仓库名称</td>
+                        <td>号架</td>
+                        <td>操作</td>
+                        @*<td><span class="glyphicon glyphicon-cog"></span></td>*@
+                    </tr>
+                </thead>
+                <tbody id="tb"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="demo7" style="float:right;"></div>
+<script>
+    //运行时加载
+    $(function () {
+        show();
+        Fan();
+    });
+    //动态加载下拉
+    function Fan() {
+        $.ajax({
+            url: "http://localhost:60847/api/TPK/GetFan",
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                $("#Select1").empty();
+                $("#Select1").append("<option selected=selected>筛选仓库</option>");
+                $(data).each(function () {
+                    $("#Select1").append("<option>" + this.WarehouseName + "</option>");
+
+                })
+            }
+        })
+    }
+    //显示全部数据
+    function show() {
+     
+        layui.use('laypage', function () {
+            var laypage = layui.laypage,
+                layer = layui.layer;
+            $.ajax({
+                url: "http://localhost:60847/api/TPK/GetRegionLis",
+                type: "get",
+                dataType: "json",
+                success: function (data) {
+                    $("#tb").empty();
+
+                    laypage.render({
+                        elem: 'demo7',
+                        count: data.length,
+                        layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip'],
+                        limit: 10,
+                        jump: function (obj) {
+                            //模拟渲染
+                            document.getElementById('tb').innerHTML = function () {
+                                var arr = []
+                                    , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                layui.each(thisData, function (index, item) {
+                                    arr.push('<tr align="center" valign="middle">' +
+                                        '<td>' + item.WarehouseName + '</td>' +
+                                        '<td>' + item.RegionListName + '</td>' +
+                                      
+                                        '<td class="actions"><a style="cursor: pointer" class="table-actions" onclick="DeleRegionListMvc(' + item.Id + ')"><i class="icon-trash"></i></a><a style="cursor: pointer" class="table-actions" onclick="AddRegionListMvc()"><i class="icon-plus"></i></a></td>'+
+
+                                        //'<td id="sp"><span class="glyphicon glyphicon-option-vertical" ></span></td>' +
+                                        '</tr>');
+                                });
+                                return arr.join('');
+                            }();
+                        }
+                    })
+                }
+            })
+
+        });
+    }
+    //筛选仓库
+    function Xuan() {
+
+        var Productsum = 0;
+        layui.use('laypage', function () {
+            var laypage = layui.laypage,
+                layer = layui.layer;
+            var options = $("#Select1 option:selected");  //获取选中的项
+            $.ajax({
+                url: "http://localhost:60847/api/TPK/ChaRegionLi?name=" + options.text(),
+                type: "get",
+                dataType: "json",
+                success: function (data) {
+
+
+                    $("#tb").empty();
+
+                    laypage.render({
+                        elem: 'demo7',
+                        count: data.length,
+                        layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip'],
+                        limit: 10,
+                        jump: function (obj) {
+                            //模拟渲染
+                            document.getElementById('tb').innerHTML = function () {
+                                var arr = []
+                                    , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                layui.each(thisData, function (index, item) {
+                                    arr.push('<tr align="center" valign="middle">' +
+                                        '<td>' + item.WarehouseName + '</td>' +
+                                        '<td>' + item.RegionListName + '</td>' +
+                                
+                                        '<td class="actions"><a style="cursor: pointer" class="table-actions" onclick="DeleRegionListMvc(' + item.Id + ')"><i class="icon-trash"></i></a><a style="cursor: pointer" class="table-actions" onclick="AddRegionListMvc()"><i class="icon-plus"></i></a></td>' +
+                                        //'<td><span class="glyphicon glyphicon-option-vertical"></span></td>' +
+                                        '</tr>');
+                                    Productsum += item.Quantity;
+                                });
+
+                      
+
+
+                                return arr.join('');
+                            }();
+                        }
+                    })
+                }
+            })
+        });
+    }
+    //模糊查询号架
+    function Cha() {
+        layui.use('laypage', function () {
+            var laypage = layui.laypage,
+                layer = layui.layer;
+            var txt = $("#searchinput").val();  //获取文本value值
+            $.ajax({
+                url: "http://localhost:60847/api/TPK/ChaRegionList?name=" + txt,
+                type: "get",
+                dataType: "json",
+                success: function (data) {
+                    $("#tb").empty();
+
+                    laypage.render({
+                        elem: 'demo7',
+                        count: data.length,
+                        layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip'],
+                        limit: 10,
+                        jump: function (obj) {
+                            //模拟渲染
+                            document.getElementById('tb').innerHTML = function () {
+                                var arr = []
+                                    , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                layui.each(thisData, function (index, item) {
+                                    arr.push('<tr align="center" valign="middle">' +
+                                        '<td>' + item.WarehouseName + '</td>' +
+                                        '<td>' + item.RegionListName + '</td>' +
+                                      
+                                        '<td class="actions"><a style="cursor: pointer" class="table-actions" onclick="DeleRegionListMvc(' + item.Id + ')"><i class="icon-trash"></i></a><a style="cursor: pointer" class="table-actions" onclick="AddRegionListMvc()"><i class="icon-plus"></i></a></td>' +
+                                        //'<td><span class="glyphicon glyphicon-option-vertical"></span></td>' +
+                                        '</tr>');
+                                });
+                                return arr.join('');
+                            }();
+                        }
+                    })
+                }
+            })
+        });
+        document.getElementById('#searchinput').text = "";
+    }
+    //点击全部显示
+    function Quan() {
+        show();
+        Fan();
+    };
+
+    function Dao() {
+        window.location.href = "exportexcel.action";
+    }
+
+    $(document).ready(function () {
+        $("#sp").mouseover(function () {
+            $("#sp").html('鼠标进来了');
+        })
+    })
+
+
+
+    //删除区分
+    function DeleRegionListMvc(id) {
+
+      
+        $.ajax({
+            url: "http://localhost:60847/api/TPK/DeleRegionList?id=" + id,
+            type: "DELETE",
+            success: function (date) {
+
+                if (data > 0) {
+                    location.href = '/TPK/GetRegionListViewMvc'
+                } else {
+                    location.href = '/TPK/GetRegionListViewMvc'
+                }
+            }
+        })
+    }
+
+
+  
+    //添加区分
+    function AddRegionListMvc() {
+     
+        $.ajax({
+            url: "http://localhost:60847/api/TPK/GetFan",
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+
+                $(data).each(function () {
+                    $("#WarehouseId").append("<option value='" + this.Id + "'>" + this.WarehouseName + "</option>");
+
+                })
+            }
+        })
+
+        var str = "<table style='width: 170px; height: 130px;margin-left:150px;' class='layui-table'><tr><td style = 'width: 230px;'>仓库名称</td><td><select id='WarehouseId' style = 'width: 150px;height:30px;'></select></td><tr>  <tr><td style = 'width: 230px;'>区分名称</td><td><input id='RegionListName' type='text' /></td></tr></table > <input id='Button1' type='button' style='width:227px;margin-left:150px;height:30px;' value='添加' onclick='AddRegio()'/>";
+           
+          
+               
+        layer.open(
+            {
+                type: 1,
+                title: "新增区分",
+                content: str,
+                area: ["500px", "300px"],
+            });
+
+      
+
+    }
+    
+    //添加
+    function AddRegio() {
+      
+        var o = {
+
+            WarehouseId: $("#WarehouseId").val(),//仓库id
+            RegionListName: $("#RegionListName").val(),
+         
+
+        }
+        $.ajax({
+            url: "http://localhost:60847/api/TPK/AddRegionList?w=" + JSON.stringify(o),
+            data: { o: JSON.stringify(o) },
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+
+                if (data > 0) {
+                    location.href = '/TPK/GetRegionListViewMvc'
+                } else {
+                    location.href = '/TPK/GetRegionListViewMvc'
+                }
+            }
+
+
+        })
+    }
+</script>
+
