@@ -10,17 +10,17 @@ namespace WMS.Controllers
     {
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            //if (filterContext.HttpContext.Session["User"] == null)
+            //if (filterContext.HttpContext.Session["Login"] == null)
             //{
             //    var context = new ContentResult();
             //    context.Content = "<script>location.href='../fmb01/Login.html';</script>";
             //    filterContext.Result = context;
             //}
-            var cookie = HttpContext.Current.Request.Cookies["Login"];
-            if (cookie == null || cookie.Value != "Already Login")
-            {
-                filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(new { Controller = "fmb01", Action = "Login.html" }));
-            }
+            //var cookie = HttpContext.Current.Request.Cookies["Login"];
+            //if (cookie == null || cookie.Value != "Already Login")
+            //{
+            //    filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(new { Controller = "fmb01", Action = "Login.html" }));
+            //}
         }
     }
 }

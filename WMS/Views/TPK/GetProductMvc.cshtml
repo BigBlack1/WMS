@@ -1,0 +1,246 @@
+﻿
+
+@{
+    ViewBag.Title = "GetProductMvc";
+    Layout = "~/Views/Default/Index.cshtml";
+}
+
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui-v2.4.5/layui/layui.js"></script>
+<div style="height:620px;margin-top:2px;">
+    <br />
+    <div style="height:50px;">
+        <a onclick="Quan()" style="height:30px;margin-top:10px;cursor: pointer" class="current">
+            <span aria-hidden="true" style="font-size:18px;">所有仓库</span>
+        </a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <select id="Select1" style="border:none;" onchange="Xuan()"></select>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;  <a>仓库状态:<span id="summ"></span></a>
+
+        <a onclick="Cha()" style="height:30px;margin-top:10px;float:right;cursor: pointer" class="current">
+            <span aria-hidden="true" style="font-size:23px;">搜索</span>
+        </a>
+
+        <input type="text" title="Search" class="searchinput" id="searchinput" style="border:none;height:30px;background-color:#fafbfc;float:right;margin-top:10px;" placeholder="搜索入库产品" />
+
+    </div>
+
+    <br />
+    @*-----------------------------表格*@
+    <div>
+        <div style="background-color:white;margin-left:10px;margin-right:10px; height:540px;">
+            <table class="table table-hover" border="1" style="margin: auto;border:none;">
+                <thead>
+                    <tr align="center" valign="middle">
+                        <td>产品编号</td>
+                        <td>产品名称</td>
+                        <td>产品品牌</td>
+                        <td>数量</td>
+                        <td>产品分类</td>
+                        <td>入库仓库</td>
+                        <td>架号</td>
+
+                        @*<td><span class="glyphicon glyphicon-cog"></span></td>*@
+                    </tr>
+                </thead>
+                <tbody id="tb"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="demo7" style="float:right;"></div>
+<script>
+        //运行时加载
+        $(function () {
+            show();
+            Fan();
+        });
+        //动态加载下拉
+        function Fan() {
+            $.ajax({
+                url: "http://localhost:60847/api/TPK/GetFan",
+                type: "get",
+                dataType: "json",
+                success: function (data) {
+                    $("#Select1").empty();
+                    $("#Select1").append("<option selected=selected>筛选仓库</option>");
+                    $(data).each(function () {
+                        $("#Select1").append("<option>" + this.Remark + "</option>");
+
+                    })
+                }
+            })
+        }
+        //显示全部数据
+    function show() {
+        $("#summ").text("")
+            layui.use('laypage', function () {
+                var laypage = layui.laypage,
+                    layer = layui.layer;
+                $.ajax({
+                    url: "http://localhost:60847/api/TPK/getru",
+                    type: "get",
+                    dataType: "json",
+                    success: function (data) {
+                        $("#tb").empty();
+
+                        laypage.render({
+                            elem: 'demo7',
+                            count: data.length,
+                            layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip'],
+                            limit: 10,
+                            jump: function (obj) {
+                                //模拟渲染
+                                document.getElementById('tb').innerHTML = function () {
+                                    var arr = []
+                                        , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                    layui.each(thisData, function (index, item) {
+                                        arr.push('<tr align="center" valign="middle">' +
+                                            '<td>' + item.Id + '</td>' +
+                                            '<td>' + item.ProductName + '</td>' +
+                                            '<td>' + item.Brand + '</td>' +
+                                            '<td>' + item.Quantity + '(箱)</td>' +
+                                            '<td>' + item.ProductTypeName + '</td>' +
+                                            '<td>' + item.Remark + '</td>' +
+                                            '<td>' + item.RegionListName + '</td>' +
+
+                                            //'<td id="sp"><span class="glyphicon glyphicon-option-vertical" ></span></td>' +
+                                            '</tr>');
+                                    });
+                                    return arr.join('');
+                                }();
+                            }
+                        })
+                    }
+                })
+
+            });
+        }
+        //筛选仓库
+    function Xuan() {
+
+        var Productsum = 0;
+            layui.use('laypage', function () {
+                var laypage = layui.laypage,
+                    layer = layui.layer;
+                var options = $("#Select1 option:selected");  //获取选中的项
+                $.ajax({
+                    url: "http://localhost:60847/api/TPK/GetRemark?name=" + options.text(),
+                    type: "get",
+                    dataType: "json",
+                    success: function (data) {
+
+
+                        $("#tb").empty();
+
+                        laypage.render({
+                            elem: 'demo7',
+                            count: data.length,
+                            layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip'],
+                            limit: 10,
+                            jump: function (obj) {
+                                //模拟渲染
+                                document.getElementById('tb').innerHTML = function () {
+                                    var arr = []
+                                        , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                    layui.each(thisData, function (index, item) {
+                                        arr.push('<tr align="center" valign="middle">' +
+                                            '<td>' + item.Id + '</td>' +
+                                            '<td>' + item.ProductName + '</td>' +
+                                            '<td>' + item.Brand + '</td>' +
+                                            '<td>' + item.Quantity +'(箱)</td>' +
+                                            '<td>' + item.ProductTypeName + '</td>' +
+                                            '<td>' + item.Remark + '</td>' +
+                                            '<td>' + item.RegionListName + '</td>' +
+
+                                            //'<td><span class="glyphicon glyphicon-option-vertical"></span></td>' +
+                                            '</tr>');
+                                        Productsum += item.Quantity;
+                                    });
+
+                                    if (2999<Productsum<=3000) {
+                                        $("#summ").text("货物已满");
+                                    }
+                                    if (Productsum < 2300) {
+                                        $("#summ").text("正常");
+                                    }
+                                    if (Productsum<1000) {
+                                        $("#summ").text("欠缺");
+                                    }
+
+
+                                    return arr.join('');
+                                }();
+                            }
+                        })
+                    }
+                })
+            });
+        }
+        //模糊查询产品
+        function Cha() {
+            layui.use('laypage', function () {
+                var laypage = layui.laypage,
+                    layer = layui.layer;
+                var txt = $("#searchinput").val();  //获取文本value值
+                $.ajax({
+                    url: "http://localhost:60847/api/TPK/GetProductName?name=" + txt,
+                    type: "get",
+                    dataType: "json",
+                    success: function (data) {
+                        $("#tb").empty();
+
+                        laypage.render({
+                            elem: 'demo7',
+                            count: data.length,
+                            layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip'],
+                            limit: 10,
+                            jump: function (obj) {
+                                //模拟渲染
+                                document.getElementById('tb').innerHTML = function () {
+                                    var arr = []
+                                        , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                    layui.each(thisData, function (index, item) {
+                                        arr.push('<tr align="center" valign="middle">' +
+                                            '<td>' + item.Id + '</td>' +
+                                            '<td>' + item.ProductName + '</td>' +
+                                            '<td>' + item.Brand + '</td>' +
+                                            '<td>' + item.Quantity + '(箱)</td>' +
+                                            '<td>' + item.ProductTypeName + '</td>' +
+                                            '<td>' + item.Remark + '</td>' +
+                                            '<td>' + item.RegionListName + '</td>' +
+                                            '<td>' + item.StartTime + '</td>' +
+                                            //'<td><span class="glyphicon glyphicon-option-vertical"></span></td>' +
+                                            '</tr>');
+                                    });
+                                    return arr.join('');
+                                }();
+                            }
+                        })
+                    }
+                })
+            });
+            document.getElementById('#searchinput').text = "";
+        }
+        //点击全部显示
+        function Quan() {
+            show();
+            Fan();
+        };
+
+        function Dao() {
+            window.location.href = "exportexcel.action";
+        }
+
+        $(document).ready(function () {
+            $("#sp").mouseover(function () {
+                $("#sp").html('鼠标进来了');
+            })
+        })
+</script>
+
+
