@@ -13,8 +13,7 @@ namespace WMS.Controllers
         // GET: TPK
         public ActionResult GetWareHouseMvc()//获取仓库
         {
-            
-                
+           
             return View();
 
         }

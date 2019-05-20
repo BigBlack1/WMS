@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>登录界面</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/body.css" />
+    <script src="../Scripts/jquery-3.3.1.js"></script>
+</head>
+<body>
+<div class="container">
+	<section id="content">
+		<form >
+			<h1>永胜仓储登录</h1>
+			<div>
+				<input type="text" placeholder="邮箱" required="" id="tel" />
+			</div>
+			<div>
+				<input type="password" placeholder="密码" required="" id="pwd" />
+			</div>
+			 <div class="">
+				<span class="help-block u-errormessage" id="js-server-helpinfo">&nbsp;</span>			</div> 
+			<div>
+				<!-- <input type="submit" value="Log in" /> -->
+				<input type="submit" onclick="Login()" value="登录" class="btn btn-primary" id="js-btn-login"/>
+				<a href="#">忘记密码?</a>
+				<!-- <a href="#">Register</a> -->
+			</div>
+		</form><!-- form -->
+	</section><!-- content -->
+</div>
+<!-- container -->
+</body>
+</html>
+<script>
+    function Login() {
+        var tel = $("#tel").val();
+        var pwd = $("#pwd").val();
+        $.ajax({
+            url: "http://localhost:60847/api/SHJ/Login?tel=" + tel + "&pwd=" + pwd,
+            type: "get",
+            success: function (data) {
+                if (data == 1) {
+                    location.href = '../Default/Index';
+                }
+                else if (data == 2) {
+                    location.href = '../WMS/GetAssetAllocation';
+                }
+                else if (data == 3) {
+                    location.href = '../YYL/RuKu';
+                }
+                else {
+                    alert('网络状态失常')
+                }
+            }
+        });
+    }
+</script>

@@ -1,0 +1,158 @@
+﻿
+@{
+    ViewBag.Title = "AddChuKu";
+    Layout = "~/Views/BUJUYE.cshtml";
+}
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<form action='@Url.Action("FileUpload1","YYL")' method="post" enctype="multipart/form-data">
+    <div>
+        <b>新增入库</b>
+        <input id="Submit1" type="submit" value="提交" style="float:right;" class="btn btn-default" onclick="Add()" />
+        <input id="Button1" type="button" value="返回" style="float:right" class="btn btn-default" onclick="location.href='/YYL/ChuKu'" />
+
+    </div>
+    <input id="Hidden1" type="hidden" value="@DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")" />
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>产品分类</th>
+                <th>产品名称</th>
+                <th>数量</th>
+                <th>上传单据</th>
+                <th>入库仓库</th>
+                <th>入库货架</th>
+            </tr>
+        </thead>
+
+        <tbody id="tb">
+            <tr>
+                <td><select id="Select1" class="form-control"><option></option></select></td>
+                <td><select id="Select2" class="form-control"><option></option></select></td>
+                <td><input id="Text1" type="text" class="form-control" /></td>
+                <td>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                <div class="fileupload-new img-thumbnail" style="width: 200px; height: 150px;">
+                                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image">
+                                </div>
+                                <div class="fileupload-preview fileupload-exists img-thumbnail" style="width: 200px; max-height: 150px"></div>
+                                <div>
+                                    <span class="btn btn-default btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="fileBase" id="f1"></span><a class="btn btn-default fileupload-exists" data-dismiss="fileupload" href="#">Remove</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td><select id="Select4" class="form-control"></select></td>
+                <td><select id="Select5" class="form-control"><option></option></select></td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+
+<script>
+    $(function () {
+        CK();
+        CPFL();
+    })
+
+    //动态加载仓库下拉
+    function CK() {
+        $.ajax({
+            url: "http://localhost:60847/api/yyl/GetFan",
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                $("#Select4").empty();
+                $("#Select4").append("<option value=" + 0 + " selected=selected>筛选仓库</option>");
+                $(data).each(function () {
+                    $("#Select4").append("<option value=" + this.Id + ">" + this.Remark + "</option>");
+
+                })
+            }
+        })
+    }
+
+    //动态加载货架下拉
+
+    $("#Select4").change(function () {
+        var id = $("#Select4").val();
+        $.ajax({
+            url: "http://localhost:60847/api/yyl/GetRegion?Id=" + id,
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                $("#Select5").empty();
+                $("#Select5").append("<option selected=selected>筛选货架</option>");
+                $(data).each(function () {
+                    $("#Select5").append("<option value=" + this.Id + ">" + this.RegionListName + "</option>");
+
+                })
+            }
+        })
+    })
+    //动态加载产品分类
+    function CPFL() {
+        $.ajax({
+            url: "http://localhost:60847/api/yyl/GetProductTypes",
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                $("#Select1").empty();
+                $("#Select1").append("<option value=" + 0 + " selected=selected>筛选产品分类</option>");
+                $(data).each(function () {
+                    $("#Select1").append("<option value=" + this.Id + ">" + this.ProductTypeName + "</option>");
+
+                })
+            }
+        })
+    }
+    //动态加载产品
+
+    $("#Select1").change(function () {
+        var id = $("#Select1").val();
+        $.ajax({
+            url: "http://localhost:60847/api/yyl/GetProducts?Id=" + id,
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                $("#Select2").empty();
+
+                $("#Select2").append("<option selected=selected>筛选产品</option>");
+                $(data).each(function () {
+                    $("#Select2").append("<option value=" + this.Id + ">" + this.ProductName + "</option>");
+
+                })
+            }
+        })
+    })
+    function Add() {
+        var h1 = $("#Hidden1").val();
+        var s2 = $("#Select2").val();
+        var s3 = $("#Text1").val();
+        var s4 = $("#f1").val();
+        var s5 = $("#Select5").val();
+        $.ajax({
+            url: "http://localhost:60847/api/yyl/AddChuKu",
+            type: "post",
+            dataType: "json",
+            data: { Quantity: s3, StartTime: h1, RegionListId: s5, Contract: s4, ProductId: s2 },
+            success: function (data) {
+                if (data == "添加成功") {
+
+
+                }
+            }
+        })
+    }
+
+
+
+
+
+</script>
+
+

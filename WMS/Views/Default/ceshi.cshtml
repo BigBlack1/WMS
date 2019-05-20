@@ -1,0 +1,315 @@
+﻿
+@{
+    ViewBag.Title = "ceshi";
+    Layout = "~/Views/BUJUYE.cshtml";
+}
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>jQuery可伸缩时间轴代码timeline插件</title>
+    <link href="~/js/css/timeline.css" rel="stylesheet" />
+    <script src="~/js/js/jquery-1.8.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //隐藏所有子栏目（除第一个栏目外）
+            $(".year:not(:first)").find(".month").hide();
+            //点击大栏目
+            $(".year>li").click(function () {
+                $("li.active", $(this).parent()).removeClass("active");
+                $(this).addClass("active");
+                $("ul>li:first", this).addClass("active");
+            });
+            $(".month>li").click(function () {
+                var $ul = $(this).parent();
+                $ul.find(".active").removeClass("active");
+                $(this).addClass("active");
+                return false;
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <script src="/demos/googlegg.js"></script>
+    <div class="box" style="height:1000px">
+        <div class="timeline">
+            <ul class="year">
+                <!--year-->
+                <li>
+                    <div class="year-button"> 2016 </div>
+                    <ul class="month">
+                        <li><a href="#">12月</a></li>
+                        <li><a href="#">11月</a></li>
+                        <li><a href="#">10月</a></li>
+                        <li><a href="#">9月</a></li>
+                        <li><a href="#">8月</a></li>
+                        <li><a href="#">7月</a></li>
+                        <li><a href="#">6月</a></li>
+                        <li><a href="#">5月</a></li>
+                        <li><a href="#">4月</a></li>
+                        <li><a href="#">3月</a></li>
+                        <li><a href="#">2月</a></li>
+                        <li><a href="#">1月</a></li>
+                    </ul>
+                    <!--month-->
+                </li>
+                <!--year-->
+                <li class="active">
+                    <div class="year-button"> 2015 </div>
+                    <ul class="month">
+                        <li class="active"><a href="#">5月</a></li>
+                        <li><a href="#">12月</a></li>
+                        <li><a href="#">11月</a></li>
+                        <li><a href="#">10月</a></li>
+                        <li><a href="#">9月</a></li>
+                        <li><a href="#">8月</a></li>
+                        <li><a href="#">7月</a></li>
+                        <li><a href="#">6月</a></li>
+                        <li><a href="#">5月</a></li>
+                        <li><a href="#">4月</a></li>
+                        <li><a href="#">3月</a></li>
+                        <li><a href="#">2月</a></li>
+                        <li><a href="#">1月</a></li>
+                    </ul>
+                    <!--month-->
+                </li>
+                <!--year-->
+                <li>
+                    <div class="year-button"> 2014 </div>
+                    <ul class="month">
+                        <li><a href="#">12月</a></li>
+                        <li><a href="#">11月</a></li>
+                        <li><a href="#">10月</a></li>
+                        <li><a href="#">9月</a></li>
+                        <li><a href="#">8月</a></li>
+                        <li><a href="#">7月</a></li>
+                        <li><a href="#">6月</a></li>
+                        <li><a href="#">5月</a></li>
+                        <li><a href="#">4月</a></li>
+                        <li><a href="#">3月</a></li>
+                        <li><a href="#">2月</a></li>
+                        <li><a href="#">1月</a></li>
+                    </ul>
+                    <!--month-->
+                </li>
+                <!--year-->
+                <li>
+                    <div class="year-button"> 2013 </div>
+                    <ul class="month">
+                        <li><a href="#">12月</a></li>
+                        <li><a href="#">11月</a></li>
+                        <li><a href="#">10月</a></li>
+                        <li><a href="#">9月</a></li>
+                        <li><a href="#">8月</a></li>
+                        <li><a href="#">7月</a></li>
+                        <li><a href="#">6月</a></li>
+                        <li><a href="#">5月</a></li>
+                        <li><a href="#">4月</a></li>
+                        <li><a href="#">3月</a></li>
+                        <li><a href="#">2月</a></li>
+                        <li><a href="#">1月</a></li>
+                    </ul>
+                    <!--month-->
+                </li>
+                <!--year-->
+                <li>
+                    <div class="year-button"> 2012 </div>
+                    <ul class="month">
+                        <li><a href="#">12月</a></li>
+                        <li><a href="#">11月</a></li>
+                        <li><a href="#">10月</a></li>
+                        <li><a href="#">9月</a></li>
+                        <li><a href="#">8月</a></li>
+                        <li><a href="#">7月</a></li>
+                        <li><a href="#">6月</a></li>
+                        <li><a href="#">5月</a></li>
+                        <li><a href="#">4月</a></li>
+                        <li><a href="#">3月</a></li>
+                        <li><a href="#">2月</a></li>
+                        <li><a href="#">1月</a></li>
+                    </ul>
+                    <!--month-->
+                </li>
+                <!--year-->
+                <li>
+                    <div class="year-button"> 2011 </div>
+                    <ul class="month">
+                        <li><a href="#">12月</a></li>
+                        <li><a href="#">11月</a></li>
+                        <li><a href="#">10月</a></li>
+                        <li><a href="#">9月</a></li>
+                        <li><a href="#">8月</a></li>
+                        <li><a href="#">7月</a></li>
+                        <li><a href="#">6月</a></li>
+                        <li><a href="#">5月</a></li>
+                        <li><a href="#">4月</a></li>
+                        <li><a href="#">3月</a></li>
+                        <li><a href="#">2月</a></li>
+                        <li><a href="#">1月</a></li>
+                    </ul>
+                    <!--month-->
+                </li>
+                <!--year-->
+                <li>
+                    <div class="year-button"> 2010 </div>
+                    <ul class="month">
+                        <li><a href="#">12月</a></li>
+                        <li><a href="#">11月</a></li>
+                        <li><a href="#">10月</a></li>
+                        <li><a href="#">9月</a></li>
+                        <li><a href="#">8月</a></li>
+                        <li><a href="#">7月</a></li>
+                        <li><a href="#">6月</a></li>
+                        <li><a href="#">5月</a></li>
+                        <li><a href="#">4月</a></li>
+                        <li><a href="#">3月</a></li>
+                        <li><a href="#">2月</a></li>
+                        <li><a href="#">1月</a></li>
+                    </ul>
+                    <!--month-->
+                </li>
+                <!--year-->
+                <li>
+                    <div class="year-button"> 2009 </div>
+                    <ul class="month">
+                        <li><a href="#">12月</a></li>
+                        <li><a href="#">11月</a></li>
+                        <li><a href="#">10月</a></li>
+                        <li><a href="#">9月</a></li>
+                        <li><a href="#">8月</a></li>
+                        <li><a href="#">7月</a></li>
+                        <li><a href="#">6月</a></li>
+                        <li><a href="#">5月</a></li>
+                        <li><a href="#">4月</a></li>
+                        <li><a href="#">3月</a></li>
+                        <li><a href="#">2月</a></li>
+                        <li><a href="#">1月</a></li>
+                    </ul>
+                    <!--month-->
+                </li>
+                <!--year-->
+                <li>
+                    <div class="year-button"> 2008 </div>
+                    <ul class="month">
+                        <li><a href="#">12月</a></li>
+                        <li><a href="#">11月</a></li>
+                        <li><a href="#">10月</a></li>
+                        <li><a href="#">9月</a></li>
+                        <li><a href="#">8月</a></li>
+                        <li><a href="#">7月</a></li>
+                        <li><a href="#">6月</a></li>
+                        <li><a href="#">5月</a></li>
+                        <li><a href="#">4月</a></li>
+                        <li><a href="#">3月</a></li>
+                        <li><a href="#">2月</a></li>
+                        <li><a href="#">1月</a></li>
+                    </ul>
+                    <!--month-->
+                </li>
+                <!--year-->
+                <li>
+                    <div class="year-button"> 2007 </div>
+                    <ul class="month">
+                        <li><a href="#">12月</a></li>
+                        <li><a href="#">11月</a></li>
+                        <li><a href="#">10月</a></li>
+                        <li><a href="#">9月</a></li>
+                        <li><a href="#">8月</a></li>
+                        <li><a href="#">7月</a></li>
+                        <li><a href="#">6月</a></li>
+                        <li><a href="#">5月</a></li>
+                        <li><a href="#">4月</a></li>
+                        <li><a href="#">3月</a></li>
+                        <li><a href="#">2月</a></li>
+                        <li><a href="#">1月</a></li>
+                    </ul>
+                    <!--month-->
+                </li>
+                <!--year-->
+                <li>
+                    <div class="year-button"> 2006 </div>
+                    <ul class="month">
+                        <li><a href="#">12月</a></li>
+                        <li><a href="#">11月</a></li>
+                        <li><a href="#">10月</a></li>
+                        <li><a href="#">9月</a></li>
+                        <li><a href="#">8月</a></li>
+                        <li><a href="#">7月</a></li>
+                        <li><a href="#">6月</a></li>
+                        <li><a href="#">5月</a></li>
+                        <li><a href="#">4月</a></li>
+                        <li><a href="#">3月</a></li>
+                        <li><a href="#">2月</a></li>
+                        <li><a href="#">1月</a></li>
+                    </ul>
+                    <!--month-->
+                </li>
+                <!--year-->
+                <li>
+                    <div class="year-button"> 2005 </div>
+                    <ul class="month">
+                        <li><a href="#">12月</a></li>
+                        <li><a href="#">11月</a></li>
+                        <li><a href="#">10月</a></li>
+                        <li><a href="#">9月</a></li>
+                        <li><a href="#">8月</a></li>
+                        <li><a href="#">7月</a></li>
+                        <li><a href="#">6月</a></li>
+                        <li><a href="#">5月</a></li>
+                        <li><a href="#">4月</a></li>
+                        <li><a href="#">3月</a></li>
+                        <li><a href="#">2月</a></li>
+                        <li><a href="#">1月</a></li>
+                    </ul>
+                    <!--month-->
+                </li>
+                <!--year-->
+                <li>
+                    <div class="year-button"> 2004 </div>
+                    <ul class="month">
+                        <li><a href="#">12月</a></li>
+                        <li><a href="#">11月</a></li>
+                        <li><a href="#">10月</a></li>
+                        <li><a href="#">9月</a></li>
+                        <li><a href="#">8月</a></li>
+                        <li><a href="#">7月</a></li>
+                        <li><a href="#">6月</a></li>
+                        <li><a href="#">5月</a></li>
+                        <li><a href="#">4月</a></li>
+                        <li><a href="#">3月</a></li>
+                        <li><a href="#">2月</a></li>
+                        <li><a href="#">1月</a></li>
+                    </ul>
+                    <!--month-ul-->
+                    <!--month-->
+                </li>
+                <!--year-->
+                <li>
+                    <div class="year-button"> 2003 </div>
+                    <ul class="month">
+                        <li><a href="#">12月</a></li>
+                        <li><a href="#">11月</a></li>
+                        <li><a href="#">10月</a></li>
+                        <li><a href="#">9月</a></li>
+                        <li><a href="#">8月</a></li>
+                        <li><a href="#">7月</a></li>
+                        <li><a href="#">6月</a></li>
+                        <li><a href="#">5月</a></li>
+                        <li><a href="#">4月</a></li>
+                        <li><a href="#">3月</a></li>
+                        <li><a href="#">2月</a></li>
+                        <li><a href="#">1月</a></li>
+                    </ul>
+                    <!--month-ul-->
+                    <!--month-->
+                </li>
+                <!--year-->
+            </ul>
+            <!--time-ul-->
+        </div>
+        <!--time-->
+    </div>
+</body>
+</html>

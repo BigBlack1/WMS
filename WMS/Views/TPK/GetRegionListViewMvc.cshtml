@@ -76,7 +76,7 @@
     }
     //显示全部数据
     function show() {
-
+     
         layui.use('laypage', function () {
             var laypage = layui.laypage,
                 layer = layui.layer;
@@ -101,7 +101,7 @@
                                     arr.push('<tr align="center" valign="middle">' +
                                         '<td>' + item.WarehouseName + '</td>' +
                                         '<td>' + item.RegionListName + '</td>' +
-
+                                      
                                         '<td class="actions"><a style="cursor: pointer" class="table-actions" onclick="DeleRegionListMvc(' + item.Id + ')"><i class="icon-trash"></i></a><a style="cursor: pointer" class="table-actions" onclick="AddRegionListMvc()"><i class="icon-plus"></i></a></td>'+
 
                                         //'<td id="sp"><span class="glyphicon glyphicon-option-vertical" ></span></td>' +
@@ -147,14 +147,14 @@
                                     arr.push('<tr align="center" valign="middle">' +
                                         '<td>' + item.WarehouseName + '</td>' +
                                         '<td>' + item.RegionListName + '</td>' +
-
+                                
                                         '<td class="actions"><a style="cursor: pointer" class="table-actions" onclick="DeleRegionListMvc(' + item.Id + ')"><i class="icon-trash"></i></a><a style="cursor: pointer" class="table-actions" onclick="AddRegionListMvc()"><i class="icon-plus"></i></a></td>' +
                                         //'<td><span class="glyphicon glyphicon-option-vertical"></span></td>' +
                                         '</tr>');
                                     Productsum += item.Quantity;
                                 });
 
-
+                      
 
 
                                 return arr.join('');
@@ -192,7 +192,7 @@
                                     arr.push('<tr align="center" valign="middle">' +
                                         '<td>' + item.WarehouseName + '</td>' +
                                         '<td>' + item.RegionListName + '</td>' +
-
+                                      
                                         '<td class="actions"><a style="cursor: pointer" class="table-actions" onclick="DeleRegionListMvc(' + item.Id + ')"><i class="icon-trash"></i></a><a style="cursor: pointer" class="table-actions" onclick="AddRegionListMvc()"><i class="icon-plus"></i></a></td>' +
                                         //'<td><span class="glyphicon glyphicon-option-vertical"></span></td>' +
                                         '</tr>');
@@ -226,78 +226,64 @@
 
     //删除区分
     function DeleRegionListMvc(id) {
-        if (@Session["Login"]== 1) {
-            $.ajax({
-                url: "http://localhost:60847/api/TPK/DeleRegionList?id=" + id,
-                type: "DELETE",
-                success: function (date) {
-
-                    if (data > 0) {
-                        location.href = '/TPK/GetRegionListViewMvc'
-                    } else {
-                        location.href = '/TPK/GetRegionListViewMvc'
-                    }
-                }
-            })
-        } else {
-            layui.msg('无权操作', 1000)
-        }
 
       
+        $.ajax({
+            url: "http://localhost:60847/api/TPK/DeleRegionList?id=" + id,
+            type: "DELETE",
+            success: function (date) {
+
+                if (data > 0) {
+                    location.href = '/TPK/GetRegionListViewMvc'
+                } else {
+                    location.href = '/TPK/GetRegionListViewMvc'
+                }
+            }
+        })
     }
 
 
-
+  
     //添加区分
     function AddRegionListMvc() {
-          if (@Session["Login"]==1)
-        {
-              $.ajax({
-                  url: "http://localhost:60847/api/TPK/GetFan",
-                  type: "get",
-                  dataType: "json",
-                  success: function (data) {
+     
+        $.ajax({
+            url: "http://localhost:60847/api/TPK/GetFan",
+            type: "get",
+            dataType: "json",
+            success: function (data) {
 
-                      $(data).each(function () {
-                          $("#WarehouseId").append("<option value='" + this.Id + "'>" + this.WarehouseName + "</option>");
+                $(data).each(function () {
+                    $("#WarehouseId").append("<option value='" + this.Id + "'>" + this.WarehouseName + "</option>");
 
-                      })
-                  }
-              })
+                })
+            }
+        })
 
-              var str = "<table style='width: 170px; height: 130px;margin-left:150px;' class='layui-table'><tr><td style = 'width: 230px;'>仓库名称</td><td><select id='WarehouseId' style = 'width: 150px;height:30px;'></select></td><tr>  <tr><td style = 'width: 230px;'>区分名称</td><td><input id='RegionListName' type='text' /></td></tr></table > <input id='Button1' type='button' style='width:227px;margin-left:150px;height:30px;' value='添加' onclick='AddRegio()'/>";
+        var str = "<table style='width: 170px; height: 130px;margin-left:150px;' class='layui-table'><tr><td style = 'width: 230px;'>仓库名称</td><td><select id='WarehouseId' style = 'width: 150px;height:30px;'></select></td><tr>  <tr><td style = 'width: 230px;'>区分名称</td><td><input id='RegionListName' type='text' /></td></tr></table > <input id='Button1' type='button' style='width:227px;margin-left:150px;height:30px;' value='添加' onclick='AddRegio()'/>";
+           
+          
+               
+        layer.open(
+            {
+                type: 1,
+                title: "新增区分",
+                content: str,
+                area: ["500px", "300px"],
+            });
 
-
-
-              layer.open(
-                  {
-                      type: 1,
-                      title: "新增区分",
-                      content: str,
-                      area: ["500px", "300px"],
-                  });
-          }
-          else {
-             
-              layui.msg('无权操作', 1000)
-          }
-
-
-
-
-
-
+      
 
     }
-
+    
     //添加
     function AddRegio() {
-
+      
         var o = {
 
             WarehouseId: $("#WarehouseId").val(),//仓库id
             RegionListName: $("#RegionListName").val(),
-
+         
 
         }
         $.ajax({
