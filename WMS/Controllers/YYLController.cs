@@ -27,6 +27,10 @@ namespace WMS.Controllers
         {
             return View();
         }
+        public ActionResult AddChuKu()
+        {
+            return View();
+        }
         public FileResult ExportStu2()
         {
             
@@ -109,11 +113,22 @@ namespace WMS.Controllers
             ms.Seek(0, SeekOrigin.Begin);
             return File(ms, "application/vnd.ms-excel", "入库数据.xls");
         }
-
-
-
-
-
-
+        
+        public ActionResult FileUpload(HttpPostedFileBase fileBase)
+        {
+            string name = Server.MapPath("~/images");
+            string filename = Path.Combine(name, fileBase.FileName);
+            fileBase.SaveAs(filename);
+            ViewBag.bb = filename;
+            return Content("<script>alert('添加成功');location.href='/YYL/RuKu'</script>");
+        }
+        public ActionResult FileUpload1(HttpPostedFileBase fileBase)
+        {
+            string name = Server.MapPath("~/images");
+            string filename = Path.Combine(name, fileBase.FileName);
+            fileBase.SaveAs(filename);
+            ViewBag.bb = filename;
+            return Content("<script>alert('添加成功');location.href='/YYL/ChuKu'</script>");
+        }
     }
 }

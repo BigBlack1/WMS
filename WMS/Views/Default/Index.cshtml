@@ -10,7 +10,17 @@
 
 <div style="background-color:#ffffff;width:100%;height:550px;margin:0 auto">
 
-    <div style="float:left;width:15%;height:430px;margin-top:50px;margin-left:40px;">
+    <div class="form-group" style="margin-top:150px;margin-left:26px">
+        <label class="control-label col-md-2"></label>
+        <div class="col-md-7">
+            <div class="input-group">
+                <span class="input-group-addon"> </span><input class="form-control" id="pp" style="height:40px" placeholder="请输入名称" type="text">
+            </div>
+        </div>
+        <button class="btn btn-default" onclick="DIAN()">查询</button>
+    </div>
+
+    <div style="float:left;width:15%;height:430px;margin-top:30px;margin-left:40px;">
         <ul class="sidebar-nav" style="margin-left:30px;">
             <li class="sidebar-nav-link" style="padding-bottom:40px;">
                 <a href="/Default/Index">
@@ -47,7 +57,7 @@
         </ul>
     </div>
 
-    <div class="col-lg-6" style="width:80%;height:400px;margin-top:40px; ">
+    <div class="col-lg-6" style="width:80%;height:400px;margin-top:20px; ">
         <table id="table" class="layui-table">
             <thead>
                 <tr style="margin:0 auto">
@@ -68,7 +78,13 @@
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script src="~/layui-v2.4.5/layui/layui.js"></script>
 <script>
-    $(function () {
+    $(function ()
+    {
+        DIAN();
+        show();
+    });
+    function show()
+    {
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
                 , layer = layui.layer;
@@ -99,6 +115,40 @@
                 }
             })
         });
-    })
+    }
+    function DIAN()
+    {
+        var ee = $("#pp").val();
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage
+                , layer = layui.layer;
+            $("#G_xian").empty();// 清空TBODY的内容，重新加载
+            $.ajax({
+                url: "http://localhost:60847/api/WLC/DuanQues?ee=" + ee,
+                type: 'get',
+                dataType: 'Json',
+                success: function (data) {
+                    //调用分页
+                    laypage.render({
+                        elem: 'demo7'
+                        , count: data.length
+                        , layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip']
+                        , limit: 5
+                        , jump: function (obj) {
+                            //模拟渲染
+                            document.getElementById('G_xian').innerHTML = function () {
+                                var arr = []
+                                    , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                layui.each(thisData, function (index, item) {
+                                    arr.push('<tr><td>' + item.Id + '</td><td>' + item.ProductName + '</td><td>' + item.Quantity + '</td><td>' + 10 + '</td><td>' + ((item.Quantity / 100 * 10000) / 100.00 + "%") + '</td><td>库存小于10件</td></tr>');
+                                });
+                                return arr.join('');
+                            }();
+                        }
+                    });
+                }
+            })
+        });
+    }
 </script>
 

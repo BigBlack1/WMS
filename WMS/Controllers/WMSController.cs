@@ -8,6 +8,13 @@ namespace WMS.Controllers
 {
     public class WMSController : Controller
     {
+        #region 登录
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+        #endregion
         // GET: WMS
         /// <summary>
         /// 获取资产调度记录视图

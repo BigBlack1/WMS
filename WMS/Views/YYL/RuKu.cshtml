@@ -16,7 +16,7 @@
             
         </select>
         
-        <input id="Button1" class="btn btn-default" type="button" value="添加" style="float:right;margin-top:10px;" />
+        <input id="Button1" class="btn btn-default" type="button" value="添加" style="float:right;margin-top:10px;"onclick="location.href='/YYL/AddRuku'" />
         <input id="bu" class="btn btn-default" type="submit" value="导出" style="float:right;margin-top:10px;" onclick="location.href='/YYL/ExportStu2'" />
 
         <input type="image" src="/images/magglass.gif" style="height:30px;margin-top:10px;float:right;"onclick="Cha()"/>
@@ -38,7 +38,7 @@
                         <td>产品分类</td>
                         <td>入库仓库</td>
                         <td>入库时间</td>
-                        <td><span class="glyphicon glyphicon-cog"></span></td>
+                        <td><span class="glyphicon glyphicon-cog"></span><span style="display:none">1</span></td>
                     </tr>
                 </thead>
                 <tbody id="tb"></tbody>
