@@ -525,8 +525,8 @@
     <Content Include="layui\lay\modules\tree.js" />
     <Content Include="layui\lay\modules\upload.js" />
     <Content Include="layui\lay\modules\util.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="static\Scripts\bootstrap.js" />
+    <Content Include="static\Scripts\bootstrap.min.js" />
     <Content Include="font\fontawesome-webfont.eot" />
     <Content Include="font\fontawesome-webfont.ttf" />
     <Content Include="font\fontawesome-webfont.woff" />
@@ -563,17 +563,17 @@
     <Content Include="assets\fonts\fontawesome-webfont.woff" />
     <Content Include="assets\fonts\fontawesome-webfont.woff2" />
     <Content Include="assets\fonts\FontAwesome.otf" />
-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.3.1.js" />
-    <Content Include="Scripts\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <None Include="static\Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="static\Scripts\jquery-3.3.1.js" />
+    <Content Include="static\Scripts\jquery-3.3.1.min.js" />
+    <Content Include="static\Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="static\Scripts\jquery-3.3.1.slim.min.js" />
+    <None Include="static\Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="static\Scripts\jquery.validate.js" />
+    <Content Include="static\Scripts\jquery.validate.min.js" />
+    <Content Include="static\Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="static\Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="static\Scripts\modernizr-2.8.3.js" />
     <Content Include="static\admin\css\admin.css" />
     <Content Include="static\admin\css\avatar.css" />
     <Content Include="static\admin\css\column.css" />
@@ -1107,8 +1107,8 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="static\Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="static\Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
