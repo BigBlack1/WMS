@@ -1,0 +1,207 @@
+﻿
+@{
+    ViewBag.Title = "ChuKu";
+    Layout = "~/Views/BUJUYE.cshtml";
+}
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui-v2.4.5/layui/layui.js"></script>
+<div style="height:620px;margin-top:2px;">
+    <div style="height:50px;">
+
+        <input id="Button1" type="button" class="btn btn-default" value="全部" style="margin-left:10px;" onclick="Quan()" />
+
+        <select id="Select1" style="border:none;" onchange="Xuan()"></select>
+
+        <input id="Button1" class="btn btn-default" type="button" value="添加" style="float:right;margin-top:10px;" onclick="location.href='/YYL/AddChuKu'" />
+        <input id="bu" class="btn btn-default" type="submit" value="导出" style="float:right;margin-top:10px;" onclick="location.href='/YYL/ExportStu1'" />
+
+        <input type="image" src="/images/magglass.gif" style="height:30px;margin-top:10px;float:right;" onclick="Cha()" />
+        <input type="text" title="Search" class="searchinput" id="searchinput" style="border:none;height:30px;background-color:#fafbfc;float:right;margin-top:10px;" placeholder="搜索入库产品" />
+
+    </div>
+
+    <br />
+    @*-----------------------------表格*@
+    <div>
+        <div style="background-color:white;margin-left:10px;margin-right:10px; height:540px;">
+            <table class="table table-hover" border="1" style="margin: auto;border:none;">
+                <thead>
+                    <tr align="center" valign="middle">
+                        <td>产品编号</td>
+                        <td>产品名称</td>
+                        <td>产品品牌</td>
+                        <td>出库数量</td>
+                        <td>产品分类</td>
+                        <td>出库仓库</td>
+                        <td>出库时间</td>
+                        <td><span class="glyphicon glyphicon-cog"></span></td>
+                    </tr>
+                </thead>
+                <tbody id="tb"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="demo7" style="float:right;"></div>
+<script>
+    //运行时加载
+    $(function () {
+        show();
+        Fan();
+    });
+    //动态加载下拉
+    function Fan() {
+        $.ajax({
+            url: "http://localhost:60847/api/yyl/GetFan",
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                $("#Select1").empty();
+                $("#Select1").append("<option selected=selected>筛选仓库</option>");
+                $(data).each(function () {
+                    $("#Select1").append("<option>" + this.Remark + "</option>");
+
+                })
+            }
+        })
+    }
+    //显示全部数据
+    function show() {
+        layui.use('laypage', function () {
+            var laypage = layui.laypage,
+                layer = layui.layer;
+            $.ajax({
+                url: "http://localhost:60847/api/yyl/GetChu",
+                type: "get",
+                dataType: "json",
+                success: function (data) {
+                    $("#tb").empty();
+
+                    laypage.render({
+                        elem: 'demo7',
+                        count: data.length,
+                        layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip'],
+                        limit: 10,
+                        jump: function (obj) {
+                            //模拟渲染
+                            document.getElementById('tb').innerHTML = function () {
+                                var arr = []
+                                    , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                layui.each(thisData, function (index, item) {
+                                    arr.push('<tr align="center" valign="middle">' +
+                                        '<td>' + item.Id + '</td>' +
+                                        '<td>' + item.ProductName + '</td>' +
+                                        '<td>' + item.Brand + '</td>' +
+                                        '<td>' + item.Quantity + '</td>' +
+                                        '<td>' + item.ProductTypeName + '</td>' +
+                                        '<td>' + item.Remark + '</td>' +
+                                        '<td>' + item.StartTime + '</td>' +
+                                        '<td id="sp"><span class="glyphicon glyphicon-option-vertical" ></span></td>' +
+                                        '</tr>');
+                                });
+                                return arr.join('');
+                            }();
+                        }
+                    })
+                }
+            })
+
+        });
+    }
+    //筛选仓库
+    function Xuan() {
+        layui.use('laypage', function () {
+            var laypage = layui.laypage,
+                layer = layui.layer;
+            var options = $("#Select1 option:selected");  //获取选中的项
+            $.ajax({
+                url: "http://localhost:60847/api/yyl/GetChuRemark?name=" + options.text(),
+                type: "get",
+                dataType: "json",
+                success: function (data) {
+                    $("#tb").empty();
+
+                    laypage.render({
+                        elem: 'demo7',
+                        count: data.length,
+                        layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip'],
+                        limit: 10,
+                        jump: function (obj) {
+                            //模拟渲染
+                            document.getElementById('tb').innerHTML = function () {
+                                var arr = []
+                                    , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                layui.each(thisData, function (index, item) {
+                                    arr.push('<tr align="center" valign="middle">' +
+                                        '<td>' + item.Id + '</td>' +
+                                        '<td>' + item.ProductName + '</td>' +
+                                        '<td>' + item.Brand + '</td>' +
+                                        '<td>' + item.Quantity + '</td>' +
+                                        '<td>' + item.ProductTypeName + '</td>' +
+                                        '<td>' + item.Remark + '</td>' +
+                                        '<td>' + item.StartTime + '</td>' +
+                                        '<td><span class="glyphicon glyphicon-option-vertical"></span></td>' +
+                                        '</tr>');
+                                });
+                                return arr.join('');
+                            }();
+                        }
+                    })
+                }
+            })
+        });
+    }
+    //模糊查询产品
+    function Cha() {
+        layui.use('laypage', function () {
+            var laypage = layui.laypage,
+                layer = layui.layer;
+            var txt = $("#searchinput").val();  //获取文本value值
+            $.ajax({
+                url: "http://localhost:60847/api/yyl/GetChuProductName?name=" + txt,
+                type: "get",
+                dataType: "json",
+                success: function (data) {
+                    $("#tb").empty();
+
+                    laypage.render({
+                        elem: 'demo7',
+                        count: data.length,
+                        layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip'],
+                        limit: 10,
+                        jump: function (obj) {
+                            //模拟渲染
+                            document.getElementById('tb').innerHTML = function () {
+                                var arr = []
+                                    , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                layui.each(thisData, function (index, item) {
+                                    arr.push('<tr align="center" valign="middle">' +
+                                        '<td>' + item.Id + '</td>' +
+                                        '<td>' + item.ProductName + '</td>' +
+                                        '<td>' + item.Brand + '</td>' +
+                                        '<td>' + item.Quantity + '</td>' +
+                                        '<td>' + item.ProductTypeName + '</td>' +
+                                        '<td>' + item.Remark + '</td>' +
+                                        '<td>' + item.StartTime + '</td>' +
+                                        '<td><span class="glyphicon glyphicon-option-vertical"></span></td>' +
+                                        '</tr>');
+                                });
+                                return arr.join('');
+                            }();
+                        }
+                    })
+                }
+            })
+        });
+        Fan();
+    }
+    //点击全部显示
+    function Quan() {
+        show();
+        Fan();
+    };
+</script>
+
+

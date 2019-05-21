@@ -1,0 +1,222 @@
+﻿
+@{
+    ViewBag.Title = "ChuKuShuLiang";
+    Layout = "~/Views/BUJUYE.cshtml";
+}
+
+
+<link href="~/js/css/timeline.css" rel="stylesheet" />
+<script src="~/js/js/jquery-1.8.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="~/static/admin/layui/css/layui.css" />
+<link rel="stylesheet" type="text/css" href="~/static/admin/css/admin.css" />
+<link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(function () {
+        //隐藏所有子栏目（除第一个栏目外）
+        $(".year:not(:first)").find(".month").hide();
+        //点击大栏目
+        $(".year>li").click(function () {
+            $("li.active", $(this).parent()).removeClass("active");
+            $(this).addClass("active");
+            $("ul>li:first", this).addClass("active");
+        });
+        $(".month>li").click(function () {
+            var $ul = $(this).parent();
+            $ul.find(".active").removeClass("active");
+            $(this).addClass("active");
+            return false;
+        });
+    });
+
+</script>
+
+<div style="width:100%;height:450px;">
+    <h1 style="font-size:25px;margin-left:45%;margin-top:150px;">出库数量</h1>
+    <div class="widget-content padded" style="float:left;margin-top:40px;margin-left:5%">
+        <form action="#" class="form-horizontal">
+            <div class="box" style="height:350px;width:200px;background-color:#ffffff;border:none;">
+                <div class="timeline">
+                    <ul class="year">
+                        <li>
+                            <div class="year-button">
+                                <a>2021</a>
+                            </div>
+                            <ul class="month">
+                                @for (int i = 1; i <= 12; i++)
+                                {
+                                    <li onclick="DF()"><a id="aa">@i 月</a></li>
+                                }
+                            </ul>
+                            <!--month-->
+                        </li>
+                        <li>
+                            <div class="year-button">
+                                <a>2020</a>
+                            </div>
+                            <ul class="month">
+                                @for (int i = 1; i <= 12; i++)
+                                {
+                                    <li onclick="DF()"><a id="aa">@i 月</a></li>
+                                }
+                            </ul>
+                            <!--month-->
+                        </li>
+                        <li>
+                            <div class="year-button">
+                                <a>2019</a>
+                            </div>
+                            <ul class="month">
+                                @for (int i = 1; i <= 12; i++)
+                                {
+                                    <li onclick="DD(@i)"><a id="aa">@i 月</a></li>
+                                }
+
+                            </ul>
+                        </li>
+                        <li>
+                            <div class="year-button">
+                                <a>2018</a>
+                            </div>
+                            <ul class="month">
+                                @for (int i = 1; i <= 12; i++)
+                                {
+                                    <li onclick="DF()"><a id="aa">@i 月</a></li>
+                                }
+                            </ul>
+                            <!--month-->
+                        </li>
+                    </ul>
+                    <!--time-ul-->
+                </div>
+                <!--time-->
+            </div>
+        </form>
+    </div>
+
+    <div class="col-lg-6" style="width:70%;height:400px;margin-top:40px;">
+
+        <table id="table" class="layui-table">
+            <thead>
+                <tr style="margin:0 auto">
+                    <td>编号</td>
+                    <td>名称</td>
+                    <td>出库数量</td>
+                    <td>出库时间</td>
+                </tr>
+            </thead>
+            <thead id="G_xian">
+            </thead>
+        </table>
+    </div>
+</div>
+<div id="demo7" style="float:left;margin-left:700px"></div>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/layui-v2.4.5/layui/layui.js"></script>
+<script>
+    $(function () {
+        DD();
+        show();
+
+    })
+    function show() {
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage
+                , layer = layui.layer;
+            $("#G_xian").empty();// 清空TBODY的内容，重新加载
+            $.ajax({
+                url: "http://localhost:60847/api/WLC/ChuKuShuLiangs",
+                type: 'get',
+                dataType: 'Json',
+                success: function (data) {
+                    //调用分页
+                    laypage.render({
+                        elem: 'demo7'
+                        , count: data.length
+                        , layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip']
+                        , limit: 7
+                        , jump: function (obj) {
+                            //模拟渲染
+                            document.getElementById('G_xian').innerHTML = function () {
+                                var arr = []
+                                    , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                layui.each(thisData, function (index, item) {
+                                    arr.push('<tr><td>' + item.Id + '</td><td>' + item.ProductName + '</td><td>' + item.Quantity + '</td><td>' + item.StartTime + '</td></tr>');
+                                });
+
+                                return arr.join('');
+                            }();
+                        }
+                    });
+                }
+            })
+        });
+    }
+    function DD(i) {
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage
+                , layer = layui.layer;
+            $("#G_xian").empty();// 清空TBODY的内容，重新加载
+            $.ajax({
+                url: "http://localhost:60847/api/WLC/ChuKuShuLiang?i=" + i,
+                type: 'get',
+                dataType: 'Json',
+                success: function (data) {
+                    //调用分页
+                    laypage.render({
+                        elem: 'demo7'
+                        , count: data.length
+                        , layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip']
+                        , limit: 5
+                        , jump: function (obj) {
+                            //模拟渲染
+                            document.getElementById('G_xian').innerHTML = function () {
+                                var arr = []
+                                    , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                layui.each(thisData, function (index, item) {
+                                    arr.push('<tr><td>' + item.Id + '</td><td>' + item.ProductName + '</td><td>' + item.Quantity + '</td><td>' + item.StartTime + '</td></tr>');
+                                });
+
+                                return arr.join('');
+                            }();
+                        }
+                    });
+                }
+            })
+        });
+    }
+    function DF()
+    {
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage
+                , layer = layui.layer;
+            $("#G_xian").empty();// 清空TBODY的内容，重新加载
+            $.ajax({
+                url: "http://localhost:60847/api/WLC/ChuKuShuLiang?i=" + 0,
+                type: 'get',
+                dataType: 'Json',
+                success: function (data) {
+                    //调用分页
+                    laypage.render({
+                        elem: 'demo7'
+                        , count: data.length
+                        , layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip']
+                        , limit: 5
+                        , jump: function (obj) {
+                            //模拟渲染
+                            document.getElementById('G_xian').innerHTML = function () {
+                                var arr = []
+                                    , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                layui.each(thisData, function (index, item) {
+                                    arr.push('<tr><td>' + item.Id + '</td><td>' + item.ProductName + '</td><td>' + item.Quantity + '</td><td>' + item.StartTime + '</td></tr>');
+                                });
+
+                                return arr.join('');
+                            }();
+                        }
+                    });
+                }
+            })
+        });
+    }
+</script>
+

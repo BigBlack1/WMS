@@ -1,0 +1,168 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/BUJUYE.cshtml";
+}
+<script src="~/layui/lay/modules/layer.js"></script>
+<link href="~/layui/css/modules/layer/default/layer.css" rel="stylesheet" />
+<script src="~/assets/js/jquery.min.js"></script>
+<div class="modal-shiftfix">
+    <div class="container-fluid main-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="widget-container fluid-height clearfix">
+                    <div class="form-group" style="margin-top:10px">
+                        <div class="col-md-7" style="width:15%;margin-left:10%">
+                            <select class="form-control" id="ck">
+                                <option value="">盘点仓库</option>
+                                <option value="1">宝山一号</option>
+                                <option value="2">徐汇二号</option>
+                                <option value="3">青浦三号</option>
+                                <option value="4">松江四号</option>
+                                <option value="5">闵行五号</option>
+                            </select>
+                        </div>
+                        <div class="col-md-7" style="width:20%;margin-left:30%">
+                            <input class="form-control" type="text" placeholder="请输入盘点名称" id="name"></input>
+                        </div>
+                        <span class="input-group-btn" style="margin-right:10%"><button class="btn btn-default" type="button" onclick="sousuo()">搜索</button></span>
+                        <span class="input-group-btn" style="margin-right:10%"><button class="btn btn-default" type="button" onclick="GoMake()">添加盘点</button></span>
+                    </div>
+                    <div class="heading">
+                        <i class="icon-table"></i>盘点记录
+                    </div>
+                    <div class="widget-content padded clearfix">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        盘点记录Id
+                                    </th>
+                                    <th>
+                                        盘点名称
+                                    </th>
+                                    <th class="hidden-xs">
+                                        盘点时间
+                                    </th>
+                                    <th class="hidden-xs">
+                                        盘点仓库
+                                    </th>
+                                    <th class="hidden-xs">
+                                        盘点结果
+                                    </th>
+                                    <th>
+                                        备注
+                                    </th>
+                                    <th>
+                                        查看
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="tby"></tbody>
+                        </table>
+                        <center>
+                            <ul class="pagination">
+                                <li><a href="#">首页</a></li>
+                                <li><a href="#">上一页</a></li>
+                                <li><a href="#">下一页</a></li>
+                                <li><a href="#">尾页</a></li>
+                            </ul>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    $.ajax({
+        url: "http://localhost:60847/api/KHZ/ShowMake",
+        type: "get",
+        dataType: "json",
+        success: function (data) {
+            $(data).each(function () {
+                var tr = "<tr>" +
+                    "<td>" + this.Id + "</td>" +
+                    "<td>" + this.InventoryName + "</td>" +
+                    "<td>" + this.InventoryTime + "</td>" +
+                    "<td>" + this.WarehouseName + "</td>" +
+                    "<td>" + this.Status + "</td>" +
+                    "<td>" + this.Remark + "</td>" +
+                    "<td class='actions'>" +
+                    "<div class='action-buttons'>" +
+                    "<a class='table-actions' href='/WMS/GetOneMake?mId=" + this.Id + "&iName=" + this.InventoryName + "'><i class='icon-eye-open'></i></a>" +
+                    "</div>" +
+                    "</td>" +
+                    "</tr >";
+                $("#tby").append(tr);
+            })
+        }
+    })
+
+    function sousuo() {
+        $("#tby").empty();
+        $.ajax({
+            url: "http://localhost:60847/api/KHZ/ShowMake",
+            type: "get",
+            dataType: "json",
+            data: { "ck": $("#ck").val(), "iName": $("#name").val() },
+            success: function (data) {
+                $(data).each(function () {
+                    var tr = "<tr>" +
+                        "<td>" + this.Id + "</td>" +
+                        "<td>" + this.InventoryName + "</td>" +
+                        "<td>" + this.InventoryTime + "</td>" +
+                        "<td>" + this.WarehouseName + "</td>" +
+                        "<td>" + this.Status + "</td>" +
+                        "<td>" + this.Remark + "</td>" +
+                        "<td class='actions'>" +
+                        "<div class='action-buttons'>" +
+                        "<a class='table-actions' href='/WMS/GetOneMake?mId=" + this.Id + "&iName=" + this.InventoryName + "'><i class='icon-eye-open'></i></a>" +
+                        "</div>" +
+                        "</td>" +
+                        "</tr >";
+                    $("#tby").append(tr);
+                })
+            }
+        })
+    }
+
+    //添加盘点
+    function GoMake() {
+        if (@Session["Login"] == 1 || @Session["Login"] == 2) {
+            var str = "<table><tr><td>仓库名称: </td><td><select id='Select1'>" +
+                "<option value = '1' > 宝山一号</option>" +
+                "<option value='2'>徐汇二号</option>" +
+                "<option value='3'>青浦三号</option>" +
+                "<option value='4'>松江四号</option>" +
+                "<option value='5'>闵行五号</option>" +
+                "</select ></td ></tr > <tr style='margin-top:60px;'><td>要添加的盘点名称: </td><td><input type='text' name='Capacity' id='Text1'/></td></tr> <tr><td></td><td><input type='button' onclick='pandian()' value='提交' class='layui-btn layui-btn-warm layui-btn-radius' /></td></tr></table >";
+            layer.open(
+                {
+                    type: 1,
+                    title: "去盘点",
+                    content: str,
+                    area: ["500px", "300px"],
+                });
+        } else
+        {
+            layui.msg('无权操作', 1000);
+        }
+    }
+
+    function pandian() {
+        $.ajax({
+            url: "http://localhost:60847/api/KHZ/AddCheck?wh=" + $("#Select1").val() + "&name=" + $("#Text1").val(),
+            type: "post",
+            data: { "wh": $("#Select1").val(), "name": $("#Text1").val() },
+            success: function (data) {
+                if (data > 0) {
+                    alert('添加成功');
+                }
+            }
+        })
+    }
+</script>
